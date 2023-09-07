@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
 import '../../../models/project.dart';
+import '../../../providers/entry_provider.dart';
 
 //TODO: Make Group Card prettier
 class ProjectCard extends StatelessWidget {
@@ -14,6 +15,8 @@ class ProjectCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.read<ProjectProvider>().currentProject = project;
+        context.read<EntryProvider>().setCurrentEntries(project.id);
+
         Navigator.pushNamed(context, '/dashboard');
       },
       child: Card(

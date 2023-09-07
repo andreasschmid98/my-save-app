@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:savings_tracker_app/providers/entry_provider.dart';
 
+import '../../../providers/project_provider.dart';
 import '../../shared/constants.dart';
 
 class AddEntry extends StatefulWidget {
@@ -13,7 +16,7 @@ class _AddEntryState extends State<AddEntry> {
 
   final _formKey = GlobalKey<FormState>();
 
-  String title = '';
+  String description = '';
   double saved = 0.0;
 
   @override
@@ -28,12 +31,12 @@ class _AddEntryState extends State<AddEntry> {
                   const SizedBox(height: 20.0),
                   TextFormField(
                     decoration: textInputDecoration.copyWith(
-                        hintText: 'Titel',
+                        hintText: 'Beschreibung',
                         prefixIcon: Icon(Icons.description_outlined)),
                     validator: (val) =>
-                        val!.isEmpty ? 'Welcher Titel hat Dein Eintrag?' : null,
+                        val!.isEmpty ? 'Welche Beschreibung hat Dein Eintrag?' : null,
                     onChanged: (val) {
-                      setState(() => title = val);
+                      setState(() => description = val);
                     },
                   ),
                   const SizedBox(height: 20.0),
@@ -52,7 +55,11 @@ class _AddEntryState extends State<AddEntry> {
                   FilledButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          //TODO: add entry to db
+                          int projectId = context.read<ProjectProvider>().currentProject!.id;
+                          await context
+                              .read<EntryProvider>()
+                              .createEntry(description, projectId, saved).then((response) =>
+                              Navigator.pop(context));
                           }},
                       child: const Text('Eintrag erstellen'))
                 ]),

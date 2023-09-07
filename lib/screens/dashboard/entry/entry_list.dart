@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/entry_provider.dart';
 import 'entry_card.dart';
 
 
@@ -14,9 +16,7 @@ class _EntryListState extends State<EntryList> {
   @override
   Widget build(BuildContext context) {
 
-    //TODO: replace with provider or something similar
-    final entries = [];
-
+    final entries = context.watch<EntryProvider>().currentEntries;
     return entries.isEmpty
         ? Text('Keine Einträge')
         : ListView.builder(
@@ -24,13 +24,13 @@ class _EntryListState extends State<EntryList> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              final entryItem = entries[index];
+              final entry = entries[index];
               return Dismissible(
-                  key: Key(entries[index].id),
+                  key: Key(entry.id.toString()),
                   background: Container(
                     child: Icon(Icons.delete_forever),
                   ),
-                  child: EntryCard(entry: entryItem),
+                  child: EntryCard(entry: entry),
                   onDismissed: (direction) {
                     // TODO: Delete entry in db
                     ScaffoldMessenger.of(context).showSnackBar(
