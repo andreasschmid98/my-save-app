@@ -104,9 +104,10 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   }
 
   @override
-  Future<int> deleteEntryById(int id) {
-    // TODO: implement deleteEntryById
-    throw UnimplementedError();
+  Future<int> deleteEntryById(int id) async {
+    final Database db = await _getDatabase();
+    return await db.delete(DatabaseService._ENTRIES_TABLE,
+        where: 'id = ?', whereArgs: [id]);
   }
 
   @override

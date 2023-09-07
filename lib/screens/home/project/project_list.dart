@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:savings_tracker_app/models/project.dart';
-import 'package:savings_tracker_app/screens/shared/loading.dart';
 import '../../../providers/project_provider.dart';
 import 'project_card.dart';
 
@@ -25,7 +23,17 @@ class _ProjectListState extends State<ProjectList> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               final project = projects[index];
-              return ProjectCard(project: project);
+              return Dismissible(
+                  key: Key(project.id.toString()),
+                  background: Container(
+                    child: Icon(Icons.delete_forever),
+                  ),
+                  child: ProjectCard(project: project),
+                  onDismissed: (direction) {
+                    context.read<ProjectProvider>().deleteProjectById(project.id);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Projekt gelöscht')));
+                  });
             });
   }
 }

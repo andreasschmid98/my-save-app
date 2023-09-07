@@ -20,4 +20,10 @@ class EntryProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> deleteEntryById(int id) async {
+    await _entryRepository.deleteEntryById(id);
+    currentEntries.removeWhere((entry) => entry.id == id);
+    notifyListeners();
+  }
+
 }

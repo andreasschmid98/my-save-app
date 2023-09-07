@@ -32,7 +32,7 @@ class _EntryListState extends State<EntryList> {
                   ),
                   child: EntryCard(entry: entry),
                   onDismissed: (direction) {
-                    // TODO: Delete entry in db
+                    context.read<EntryProvider>().deleteEntryById(entry.id);
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Eintrag entfernt')));
                   });
