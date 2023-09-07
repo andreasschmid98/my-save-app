@@ -6,6 +6,8 @@ abstract class ProjectRepository {
 
   Future<List<Project>> getAllProjects();
 
-  Future<Project> createProject(Project project);
+  Future<Project> createProject(String title, double savingsGoal);
+
+  Future<int> deleteProjectById(int id);
 
 }

@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
-import '../../models/project.dart';
+import 'package:provider/provider.dart';
+import 'package:savings_tracker_app/providers/project_provider.dart';
+import '../../../models/project.dart';
 
 //TODO: Make Group Card prettier
 class ProjectCard extends StatelessWidget {
 
-  Project group;
-  ProjectCard({required this.group, Key? key}) : super(key: key);
+  Project project;
+  ProjectCard({required this.project, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        context.read<ProjectProvider>().currentProject = project;
         Navigator.pushNamed(context, '/dashboard');
       },
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0), // Horizontalen Abstand anpassen
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -23,15 +26,15 @@ class ProjectCard extends StatelessWidget {
                 flex: 2,
                 child: ListTile(
                   title: Text(
-                    group.title,
+                    project.title,
                   ),
                 ),
               ),
               Expanded(
                 flex: 4,
                 child: LinearProgressIndicator(
-                  value: 0.5, // Ändere den Fortschrittswert nach Bedarf (0.0 bis 1.0)
-                  backgroundColor: Colors.grey, // Ändere die Hintergrundfarbe nach Bedarf
+                  value: 0.5,
+                  backgroundColor: Colors.grey,
                 ),
               ),
             ],

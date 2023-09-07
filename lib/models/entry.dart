@@ -1,5 +1,5 @@
 class Entry {
-  final String id;
+  final int id;
   final String projectId;
   final String description;
   final double saved;
@@ -12,10 +12,9 @@ class Entry {
 
   factory Entry.fromMap(Map<String, dynamic> map) {
     return Entry(
-      id: map['id'] as String,
-      projectId: map['group_id'] as String,
-      description: map['description'] as String,
-      saved: map['saved'] as double
-    );
+        id: map['id'] as int,
+        projectId: map['projectId'] as String,
+        description: map['description'] as String,
+        saved: map['saved'] as double);
   }
 }

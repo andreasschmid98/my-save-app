@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'package:savings_tracker_app/screens/dashboard/overview/percent_progress_card.dart';
 import 'package:savings_tracker_app/screens/dashboard/overview/savings_information_card.dart';
 import '../../../models/project.dart';
@@ -10,6 +12,9 @@ class ProgressOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final project = context.watch<ProjectProvider>().currentProject;
+
     return Container(
       height: 700,
       child: Column(
@@ -35,7 +40,7 @@ class ProgressOverview extends StatelessWidget {
                 SizedBox(width: 15),
                 Flexible(
                     child: SavingsInformationCard(
-                        infoNumber: 10000, infoText: 'Ziel')),
+                        infoNumber: project!.savingsGoal, infoText: 'Ziel')),
               ],
             ),
           ),
