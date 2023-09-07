@@ -10,9 +10,15 @@ class ProjectProvider with ChangeNotifier {
   Project? currentProject;
   List<Project> projects = [];
 
-  Future<void> createProject(Project project) async {
-    await _projectRepository.createProject(project);
+  Future<void> createProject(String title, double savingsGoal) async {
+    await _projectRepository.createProject(title, savingsGoal);
     projects = await _projectRepository.getAllProjects();
+    notifyListeners();
+  }
+
+  Future<void> deleteProjectById(int id) async {
+    await _projectRepository.deleteProjectById(id);
+    projects.removeWhere((project) => project.id == id);
     notifyListeners();
   }
 

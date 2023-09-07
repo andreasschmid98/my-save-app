@@ -1,5 +1,5 @@
 class Project {
-  final String id;
+  final int id;
   final String title;
   final double savingsGoal;
 
@@ -7,7 +7,7 @@ class Project {
 
   factory Project.fromMap(Map<String, dynamic> map) {
     return Project(
-        id: map['id'] as String,
+        id: map['id'] as int,
         title: map['title'] as String,
         savingsGoal: map['savingsGoal'] as double);
   }

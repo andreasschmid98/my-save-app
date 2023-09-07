@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
-import 'package:savings_tracker_app/screens/home/project_list.dart';
+import 'package:savings_tracker_app/screens/home/project/add_project.dart';
+import 'package:savings_tracker_app/screens/home/project/project_list.dart';
 import 'package:savings_tracker_app/screens/shared/loading.dart';
 
 
@@ -21,12 +22,16 @@ class Home extends StatelessWidget {
             child: Text('Alle Sparprojekte')),
       ),
       body: !initialized ? Loading() :  Container(
-          margin: const EdgeInsets.all(30.0), child: const Text('hi')),
+          margin: const EdgeInsets.all(30.0), child: const ProjectList()),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // TODO: implement add project
+          showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return AddProject();
+              });
         },
-        label: Text('Neue Gruppe'),
+        label: Text('Neues Projekt'),
         icon: Icon(Icons.add),
       ),
     );
