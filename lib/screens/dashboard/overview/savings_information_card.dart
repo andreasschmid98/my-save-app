@@ -12,24 +12,34 @@ class SavingsInformationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              infoNumber.toStringAsFixed(2) + ' €',
-              style: TextStyle(fontSize: 20),
+    return Container(
+      height: 100,
+      child: Card(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                FittedBox(
+                  fit: BoxFit.fill,
+                  child: Text(
+                    infoNumber.toStringAsFixed(2) + ' €',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Divider(),
+                Text(
+                  infoText.toUpperCase(),
+                  style: TextStyle(fontSize: 15),
+                  // Die FontWeight-Eigenschaft wurde hinzugefügt, um den Text fett darzustellen.
+                ),
+              ],
             ),
-            Text(
-              infoText,
-              style: TextStyle(fontSize: 15),
-            )
-          ],
+          ),
         ),
       ),
     );
   }
 }
-

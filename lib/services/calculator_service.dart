@@ -8,9 +8,16 @@ class CalculatorService {
       .map((entry) => entry.saved)
       .fold(0.0, (sum, saved) => sum + saved);
 
-  double calculateSavingStatusInPercent(List<Entry> entries, double savingGoal) {
+  double calculateSavingsStatusInPercent(List<Entry> entries, double savingsGoal) {
     double totalSavings = calculateTotalSavings(entries);
-    return totalSavings / savingGoal;
+    double savingsStatusInPercent = totalSavings / savingsGoal;
+    return savingsStatusInPercent > 1 ? 1 : savingsStatusInPercent;
+  }
+
+  double calculateRemainingAmount(List<Entry> entries, double savingsGoal) {
+    double totalSavings = calculateTotalSavings(entries);
+    double remainingAmount = savingsGoal - totalSavings;
+    return remainingAmount < 0 ? 0 : remainingAmount;
   }
 
 }

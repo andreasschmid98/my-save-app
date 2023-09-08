@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'entry/add_entry.dart';
 import 'entry/entry_list.dart';
 import 'overview/progress_overview.dart';
@@ -8,13 +10,16 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final project = context.watch<ProjectProvider>().currentProject;
+
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Align(alignment: Alignment.center, child: Text('Dashboard')),
+          title: Align(alignment: Alignment.center, child: Text(project!.title)),
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(

@@ -23,17 +23,7 @@ class _ProjectListState extends State<ProjectList> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               final project = projects[index];
-              return Dismissible(
-                  key: Key(project.id.toString()),
-                  background: Container(
-                    child: Icon(Icons.delete_forever),
-                  ),
-                  child: ProjectCard(project: project),
-                  onDismissed: (direction) {
-                    context.read<ProjectProvider>().deleteProjectById(project.id);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Projekt gelöscht')));
-                  });
+              return ProjectCard(project: project);
             });
   }
 }
