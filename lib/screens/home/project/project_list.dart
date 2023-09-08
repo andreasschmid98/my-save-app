@@ -16,7 +16,7 @@ class _ProjectListState extends State<ProjectList> {
     final projects = context.watch<ProjectProvider>().projects.keys.toList();
 
     return projects.isEmpty
-        ? Text('Keine Projekte')
+        ? Center(child: Text('Keine Projekte'))
         : ListView.builder(
             itemCount: projects.length,
             scrollDirection: Axis.vertical,

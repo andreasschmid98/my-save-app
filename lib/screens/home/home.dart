@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: const Align(
           alignment: Alignment.center,
-            child: Text('Alle Sparprojekte')),
+            child: Text('Alle Projekte')),
       ),
       body: !initialized ? Loading() :  Container(
           margin: const EdgeInsets.all(30.0), child: const ProjectList()),

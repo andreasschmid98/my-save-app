@@ -27,7 +27,6 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   }
 
   void _createTables(Database db) {
-    db.execute('PRAGMA foreign_keys = ON');
     db.execute('''
   CREATE TABLE projects(
   id INTEGER PRIMARY KEY NOT NULL,
@@ -40,8 +39,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   id INTEGER PRIMARY KEY NOT NULL,
   description TEXT,
   saved REAL,
-  projectId INTEGER,
-  FOREIGN KEY (projectId) REFERENCES Type (id) ON DELETE CASCADE ON UPDATE CASCADE,"
+  projectId INTEGER
   )
   ''');
   }
@@ -85,9 +83,13 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   }
 
   @override
-  Future<Entry> createEntry(String description, int projectId, double saved) async {
-    Entry entry =
-    Entry(id: nextEntryId++, projectId: projectId, description: description, saved: saved);
+  Future<Entry> createEntry(
+      String description, int projectId, double saved) async {
+    Entry entry = Entry(
+        id: nextEntryId++,
+        projectId: projectId,
+        description: description,
+        saved: saved);
     final Database db = await _getDatabase();
     final id = await db.insert(DatabaseService._ENTRIES_TABLE, entry.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
@@ -118,6 +120,9 @@ class DatabaseService implements ProjectRepository, EntryRepository {
 
     final entriesAsMap = await db.query(DatabaseService._ENTRIES_TABLE,
         where: 'projectId = ?', whereArgs: [projectId]);
+
+    if(entriesAsMap.isEmpty) return [];
+
     return entriesAsMap.map((entryAsMap) {
       return Entry.fromMap(entryAsMap);
     }).toList();

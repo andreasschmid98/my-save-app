@@ -20,10 +20,7 @@ class Project {
   int get hashCode => id.hashCode;
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-          other is Project &&
-              runtimeType == other.runtimeType &&
-              id == other.id;
+  bool operator == (other) => other is Project && id == other.id;
+
 
 }

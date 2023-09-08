@@ -3,24 +3,30 @@ import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'package:savings_tracker_app/services/calculator_service.dart';
 import '../../../models/project.dart';
-import '../../../providers/entry_provider.dart';
+import 'delete_project.dart';
 
 class ProjectCard extends StatelessWidget {
-
   Project project;
+
   ProjectCard({required this.project, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-  final entries = context.watch<ProjectProvider>().projects[project];
-  final savingsStatusInPercent = CalculatorService().calculateSavingsStatusInPercent(entries!, project.savingsGoal);
+    final entries = context.watch<ProjectProvider>().projects[project];
+    final savingsStatusInPercent = CalculatorService()
+        .calculateSavingsStatusInPercent(entries!, project.savingsGoal);
 
     return InkWell(
+      onLongPress: () {
+        showModalBottomSheet(
+            context: context,
+            builder: (BuildContext context) {
+              return DeleteProject(project: project);
+            });
+      },
       onTap: () {
         context.read<ProjectProvider>().currentProject = project;
-        context.read<EntryProvider>().setCurrentEntries(project.id);
-
+        context.read<ProjectProvider>().initialize();
         Navigator.pushNamed(context, '/dashboard');
       },
       child: Card(
@@ -31,17 +37,15 @@ class ProjectCard extends StatelessWidget {
             children: [
               Expanded(
                 flex: 5,
-                child:
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      project.title,
-                        overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    project.title,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                 ),
-
+              ),
               Expanded(
                 flex: 6,
                 child: LinearProgressIndicator(
@@ -51,21 +55,17 @@ class ProjectCard extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child:
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                        '${(savingsStatusInPercent * 100).toStringAsFixed(0)}%'
-                    ),
-                  ),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                      '${(savingsStatusInPercent * 100).toStringAsFixed(0)}%'),
                 ),
-
+              ),
             ],
           ),
         ),
       ),
     );
   }
-
-
 }
+

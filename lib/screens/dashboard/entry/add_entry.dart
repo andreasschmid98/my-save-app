@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:savings_tracker_app/providers/entry_provider.dart';
-
 import '../../../providers/project_provider.dart';
 import '../../shared/constants.dart';
 
@@ -57,7 +55,7 @@ class _AddEntryState extends State<AddEntry> {
                         if (_formKey.currentState!.validate()) {
                           int projectId = context.read<ProjectProvider>().currentProject!.id;
                           await context
-                              .read<EntryProvider>()
+                              .read<ProjectProvider>()
                               .createEntry(description, projectId, saved).then((response) =>
                               Navigator.pop(context));
                           }},

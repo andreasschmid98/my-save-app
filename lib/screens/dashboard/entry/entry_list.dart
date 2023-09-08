@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/entry_provider.dart';
 import '../../../providers/project_provider.dart';
 import 'entry_card.dart';
 
@@ -20,7 +19,7 @@ class _EntryListState extends State<EntryList> {
     final entries = context.watch<ProjectProvider>().projects[project];
 
     return entries!.isEmpty
-        ? Text('Keine Einträge')
+        ? Center(child: Text('Keine Einträge vorhanden.'))
         : ListView.builder(
             itemCount: entries.length,
             scrollDirection: Axis.vertical,
@@ -33,7 +32,10 @@ class _EntryListState extends State<EntryList> {
                     child: Icon(Icons.delete_forever),
                   ),
                   child: EntryCard(entry: entry),
-                  onDismissed: (direction) {
+                  onDismissed: (direction){
+                    setState(() {
+                      entries.removeAt(index);
+                    });
                     context.read<ProjectProvider>().deleteEntryById(entry.id);
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Eintrag entfernt')));

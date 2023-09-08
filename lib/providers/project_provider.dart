@@ -7,7 +7,6 @@ import '../models/entry.dart';
 import '../repositories/entry_repository.dart';
 
 class ProjectProvider with ChangeNotifier {
-
   final ProjectRepository _projectRepository = DatabaseService.instance;
   final EntryRepository _entryRepository = DatabaseService.instance;
 
@@ -16,42 +15,45 @@ class ProjectProvider with ChangeNotifier {
   Project? currentProject;
   Map<Project, List<Entry>> projects = {};
 
-  void initialize () async {
-    await _refreshProjects();
+  void initialize() async {
+    projects = await _refreshProjects();
     initialized = true;
     notifyListeners();
   }
 
   Future<void> createProject(String title, double savingsGoal) async {
     await _projectRepository.createProject(title, savingsGoal);
-    await _refreshProjects();
+    projects = await _refreshProjects();
     notifyListeners();
   }
 
   Future<void> deleteProjectById(int id) async {
     await _projectRepository.deleteProjectById(id);
-    await _refreshProjects();
+    projects = await _refreshProjects();
     notifyListeners();
   }
 
-  Future<void> createEntry(String description, int projectId, double saved) async {
+  Future<void> createEntry(
+      String description, int projectId, double saved) async {
     await _entryRepository.createEntry(description, projectId, saved);
-    await _refreshProjects();
+    projects = await _refreshProjects();
     notifyListeners();
   }
 
   Future<void> deleteEntryById(int id) async {
     await _entryRepository.deleteEntryById(id);
-    await _refreshProjects();
+    projects = await _refreshProjects();
     notifyListeners();
   }
 
-  _refreshProjects() async {
-    List<Project> allProjects = await _projectRepository.getAllProjects();
+  Future<Map<Project, List<Entry>>> _refreshProjects() async {
+    Map<Project, List<Entry>> projectsMap = {};
+    final allProjects = await _projectRepository.getAllProjects();
 
-    allProjects.forEach((project) async {
-      projects[project] = await _entryRepository.getEntriesByProjectId(project.id);
-    });
+    for (var project in allProjects) {
+      final entries = await _entryRepository.getEntriesByProjectId(project.id);
+      projectsMap[project] = entries;
+    }
+    return projectsMap;
   }
-
 }

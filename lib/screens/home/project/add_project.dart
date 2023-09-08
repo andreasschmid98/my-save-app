@@ -48,7 +48,7 @@ class _AddProjectState extends State<AddProject> {
                         hintText: 'Sparziel',
                         prefixIcon: Icon(Icons.euro_rounded)),
                     validator: (val) =>
-                    val!.isEmpty ? 'Was ist dein Sparziel?' : null,
+                    val!.isEmpty ? 'Was ist Dein Sparziel?' : null,
                     onChanged: (val) {
                       setState(() => savingsGoal = double.parse(val));
                     },
