@@ -13,7 +13,7 @@ class ProjectList extends StatefulWidget {
 class _ProjectListState extends State<ProjectList> {
   @override
   Widget build(BuildContext context) {
-    final projects = context.watch<ProjectProvider>().projects;
+    final projects = context.watch<ProjectProvider>().projects.keys.toList();
 
     return projects.isEmpty
         ? Text('Keine Projekte')

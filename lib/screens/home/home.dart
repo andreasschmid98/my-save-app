@@ -13,7 +13,6 @@ class Home extends StatelessWidget {
 
     context.watch<ProjectProvider>().initialize();
     final initialized = context.watch<ProjectProvider>().initialized;
-    final projects = context.watch<ProjectProvider>().projects;
 
     return Scaffold(
       appBar: AppBar(

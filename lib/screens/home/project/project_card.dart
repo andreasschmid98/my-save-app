@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
+import 'package:savings_tracker_app/services/calculator_service.dart';
 import '../../../models/project.dart';
 import '../../../providers/entry_provider.dart';
 
-//TODO: Make Group Card prettier
 class ProjectCard extends StatelessWidget {
 
   Project project;
@@ -12,6 +12,10 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+  final entries = context.watch<ProjectProvider>().projects[project];
+  final savingsStatusInPercent = CalculatorService().calculateSavingsStatusInPercent(entries!, project.savingsGoal);
+
     return InkWell(
       onTap: () {
         context.read<ProjectProvider>().currentProject = project;
@@ -36,7 +40,7 @@ class ProjectCard extends StatelessWidget {
               Expanded(
                 flex: 4,
                 child: LinearProgressIndicator(
-                  value: 0.5,
+                  value: savingsStatusInPercent,
                   backgroundColor: Colors.grey,
                 ),
               ),

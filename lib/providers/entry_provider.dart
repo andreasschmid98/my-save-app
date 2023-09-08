@@ -9,6 +9,7 @@ class EntryProvider with ChangeNotifier {
 
   final EntryRepository _entryRepository = DatabaseService.instance;
   List<Entry> currentEntries = [];
+  Map<int, List<Entry>> entries = {};
 
   void setCurrentEntries(int projectId) async {
     currentEntries = await _entryRepository.getEntriesByProjectId(projectId);
@@ -24,6 +25,10 @@ class EntryProvider with ChangeNotifier {
     await _entryRepository.deleteEntryById(id);
     currentEntries.removeWhere((entry) => entry.id == id);
     notifyListeners();
+  }
+
+  Future<List<Entry>> getEntriesByProjectId(int projectId) async {
+    return await _entryRepository.getEntriesByProjectId(projectId);
   }
 
 }

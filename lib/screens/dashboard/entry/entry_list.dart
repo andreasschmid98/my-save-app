@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/entry_provider.dart';
+import '../../../providers/project_provider.dart';
 import 'entry_card.dart';
 
 
@@ -15,9 +16,10 @@ class EntryList extends StatefulWidget {
 class _EntryListState extends State<EntryList> {
   @override
   Widget build(BuildContext context) {
+    final project = context.watch<ProjectProvider>().currentProject;
+    final entries = context.watch<ProjectProvider>().projects[project];
 
-    final entries = context.watch<EntryProvider>().currentEntries;
-    return entries.isEmpty
+    return entries!.isEmpty
         ? Text('Keine Einträge')
         : ListView.builder(
             itemCount: entries.length,
@@ -32,7 +34,7 @@ class _EntryListState extends State<EntryList> {
                   ),
                   child: EntryCard(entry: entry),
                   onDismissed: (direction) {
-                    context.read<EntryProvider>().deleteEntryById(entry.id);
+                    context.read<ProjectProvider>().deleteEntryById(entry.id);
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Eintrag entfernt')));
                   });

@@ -27,6 +27,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   }
 
   void _createTables(Database db) {
+    db.execute('PRAGMA foreign_keys = ON');
     db.execute('''
   CREATE TABLE projects(
   id INTEGER PRIMARY KEY NOT NULL,
@@ -39,7 +40,8 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   id INTEGER PRIMARY KEY NOT NULL,
   description TEXT,
   saved REAL,
-  projectId INTEGER
+  projectId INTEGER,
+  FOREIGN KEY (projectId) REFERENCES Type (id) ON DELETE CASCADE ON UPDATE CASCADE,"
   )
   ''');
   }

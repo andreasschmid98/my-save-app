@@ -15,4 +15,15 @@ class Project {
   Map<String, Object> toMap() {
     return {'id': id, 'title': title, 'savingsGoal': savingsGoal};
   }
+
+  @override
+  int get hashCode => id.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is Project &&
+              runtimeType == other.runtimeType &&
+              id == other.id;
+
 }
