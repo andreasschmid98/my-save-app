@@ -1,6 +1,6 @@
 import '../models/entry.dart';
 
-class CalculatorService {
+class DashboardService {
 
   double calculateTotalSavings(List<Entry> entries) => entries.isEmpty
       ? 0.0

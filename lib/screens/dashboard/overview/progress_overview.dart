@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'package:savings_tracker_app/screens/dashboard/overview/percent_progress_card.dart';
 import 'package:savings_tracker_app/screens/dashboard/overview/savings_information_card.dart';
-import '../../../services/calculator_service.dart';
+import '../../../services/dashboard_service.dart';
 import '../../shared/loading.dart';
 
 class ProgressOverview extends StatelessWidget {
@@ -13,10 +13,10 @@ class ProgressOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     final project = context.watch<ProjectProvider>().currentProject;
     final entries = context.watch<ProjectProvider>().projects[project];
-    final totalSavings = CalculatorService().calculateTotalSavings(entries!);
-    final savingsStatusInPercent = CalculatorService()
+    final totalSavings = DashboardService().calculateTotalSavings(entries!);
+    final savingsStatusInPercent = DashboardService()
         .calculateSavingsStatusInPercent(entries, project!.savingsGoal);
-    final remainingAmount = CalculatorService()
+    final remainingAmount = DashboardService()
         .calculateRemainingAmount(entries, project!.savingsGoal);
 
     return Container(

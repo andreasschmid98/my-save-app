@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
-import 'package:savings_tracker_app/services/calculator_service.dart';
+import 'package:savings_tracker_app/services/dashboard_service.dart';
 import '../../../models/project.dart';
 import 'delete_project.dart';
 
@@ -13,7 +13,7 @@ class ProjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final entries = context.watch<ProjectProvider>().projects[project];
-    final savingsStatusInPercent = CalculatorService()
+    final savingsStatusInPercent = DashboardService()
         .calculateSavingsStatusInPercent(entries!, project.savingsGoal);
 
     return InkWell(

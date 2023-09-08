@@ -20,19 +20,30 @@ class EntryCard extends StatelessWidget {
               });
         },
         child: Card(
-            child: Row(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Expanded(
-              flex: 3,
-              child: ListTile(
-                title: Text(entry.description),
+              Expanded(
+                flex: 3,
+                child: ListTile(
+                  title: Text(entry.description,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,),
+                ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Text('${entry.saved.toStringAsFixed(2)} Euro'),
-            ),
+              Expanded(
+                flex: 1,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('${entry.saved.toStringAsFixed(2)} €',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,),
+                ),
+              ),
           ],
-        )));
+        ),
+            )));
   }
 }
