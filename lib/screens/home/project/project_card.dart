@@ -25,25 +25,41 @@ class ProjectCard extends StatelessWidget {
       },
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.all(15.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-                flex: 2,
-                child: ListTile(
-                  title: Text(
-                    project.title,
+                flex: 5,
+                child:
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      project.title,
+                        overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
                   ),
                 ),
-              ),
+
               Expanded(
-                flex: 4,
+                flex: 6,
                 child: LinearProgressIndicator(
                   value: savingsStatusInPercent,
                   backgroundColor: Colors.grey,
                 ),
               ),
+              Expanded(
+                flex: 2,
+                child:
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                        '${(savingsStatusInPercent * 100).toStringAsFixed(0)}%'
+                    ),
+                  ),
+                ),
+
             ],
           ),
         ),
