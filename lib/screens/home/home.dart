@@ -13,13 +13,12 @@ class Home extends StatelessWidget {
 
     context.watch<ProjectProvider>().initialize();
     final initialized = context.watch<ProjectProvider>().initialized;
-    final projects = context.watch<ProjectProvider>().projects;
 
     return Scaffold(
       appBar: AppBar(
         title: const Align(
           alignment: Alignment.center,
-            child: Text('Alle Sparprojekte')),
+            child: Text('Alle Projekte')),
       ),
       body: !initialized ? Loading() :  Container(
           margin: const EdgeInsets.all(30.0), child: const ProjectList()),
