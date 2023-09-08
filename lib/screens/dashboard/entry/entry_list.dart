@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../../providers/project_provider.dart';
 import 'entry_card.dart';
 
-
 class EntryList extends StatefulWidget {
   const EntryList({super.key});
 
@@ -26,20 +25,7 @@ class _EntryListState extends State<EntryList> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               final entry = entries[index];
-              return Dismissible(
-                  key: Key(entry.id.toString()),
-                  background: Container(
-                    child: Icon(Icons.delete_forever),
-                  ),
-                  child: EntryCard(entry: entry),
-                  onDismissed: (direction){
-                    setState(() {
-                      entries.removeAt(index);
-                    });
-                    context.read<ProjectProvider>().deleteEntryById(entry.id);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Eintrag entfernt')));
-                  });
+              return EntryCard(entry: entry);
             });
   }
 }
