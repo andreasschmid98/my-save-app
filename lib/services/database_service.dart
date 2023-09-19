@@ -80,9 +80,17 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   @override
   Future<int> deleteProjectById(int id) async {
     final Database db = await _getDatabase();
-    await db.delete(DatabaseService._ENTRIES_TABLE, where: 'projectId = ?', whereArgs: [id]);
+    await db.delete(DatabaseService._ENTRIES_TABLE,
+        where: 'projectId = ?', whereArgs: [id]);
     return await db.delete(DatabaseService._PROJECTS_TABLE,
         where: 'id = ?', whereArgs: [id]);
+  }
+
+  @override
+  Future<int> updateProject(Project project) async {
+    final Database db = await _getDatabase();
+    return await db.update(DatabaseService._PROJECTS_TABLE, project.toMap(),
+        where: 'id = ?', whereArgs: [project.id]);
   }
 
   @override

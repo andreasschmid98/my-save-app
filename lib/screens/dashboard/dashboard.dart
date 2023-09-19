@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
+import 'package:savings_tracker_app/screens/home/project/edit_project.dart';
 import 'package:savings_tracker_app/screens/shared/constants.dart';
 import 'entry/add_entry.dart';
 import 'entry/entry_list.dart';
@@ -21,6 +22,19 @@ class Dashboard extends StatelessWidget {
         appBar: AppBar(
           title:
               Align(alignment: Alignment.center, child: Text(project!.title)),
+          actions: [
+            InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return EditProject(project: project);
+                      });
+                },
+                child: const Icon(
+                  Icons.edit,
+                ))
+          ],
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(

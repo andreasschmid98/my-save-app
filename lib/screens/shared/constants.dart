@@ -52,6 +52,8 @@ class Constants {
 
   static const String GOAL = 'Ziel';
 
+  static const String SAVE_CHANGES = 'Änderungen speichern';
+
   static const textInputDecoration = InputDecoration(
     contentPadding: EdgeInsets.all(10.0),
   );
