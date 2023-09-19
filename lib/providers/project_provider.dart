@@ -33,6 +33,13 @@ class ProjectProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateProject(Project project) async {
+    await _projectRepository.updateProject(project);
+    currentProject = project;
+    projects = await _getRefreshedProjects();
+    notifyListeners();
+  }
+
   Future<void> createEntry(
       String description, int projectId, double saved) async {
     await _entryRepository.createEntry(description, projectId, saved);

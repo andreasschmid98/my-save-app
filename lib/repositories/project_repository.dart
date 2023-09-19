@@ -8,4 +8,6 @@ abstract class ProjectRepository {
   Future<Project> createProject(String title, double savingsGoal);
 
   Future<int> deleteProjectById(int id);
+
+  Future<int> updateProject(Project project);
 }
