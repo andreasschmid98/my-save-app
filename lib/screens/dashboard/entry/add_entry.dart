@@ -48,7 +48,8 @@ class _AddEntryState extends State<AddEntry> {
                             ? null
                             : Constants.AMOUNT_REMINDER,
                     onChanged: (amountInput) {
-                      setState(() => saved = double.parse(amountInput));
+                      setState(() => saved =
+                          double.parse(amountInput.replaceAll(',', '.')));
                     },
                   ),
                   const SizedBox(height: 20.0),
@@ -72,6 +73,7 @@ class _AddEntryState extends State<AddEntry> {
   }
 
   bool _amountInputIsValid(String amountInput) {
-    return amountInput.isNotEmpty && double.tryParse(amountInput) != null;
+    return amountInput.isNotEmpty &&
+        double.tryParse(amountInput.replaceAll(',', '.')) != null;
   }
 }

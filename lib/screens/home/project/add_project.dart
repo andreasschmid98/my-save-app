@@ -4,7 +4,6 @@ import 'package:savings_tracker_app/providers/project_provider.dart';
 
 import 'package:savings_tracker_app/screens/shared/constants.dart';
 
-
 class AddProject extends StatefulWidget {
   const AddProject({super.key});
 
@@ -49,8 +48,8 @@ class _AddProjectState extends State<AddProject> {
                             ? null
                             : Constants.SAVINGS_GOAL_REMINDER,
                     onChanged: (savingsGoalInput) {
-                      setState(
-                          () => savingsGoal = double.parse(savingsGoalInput));
+                      setState(() => savingsGoal =
+                          double.parse(savingsGoalInput.replaceAll(',', '.')));
                     },
                   ),
                   const SizedBox(height: 20.0),
@@ -71,6 +70,6 @@ class _AddProjectState extends State<AddProject> {
 
   bool _savingsGoalInputIsValid(String savingsGoalInput) {
     return savingsGoalInput.isNotEmpty &&
-        double.tryParse(savingsGoalInput) != null;
+        double.tryParse(savingsGoalInput.replaceAll(',', '.')) != null;
   }
 }
