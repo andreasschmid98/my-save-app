@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:savings_tracker_app/screens/shared/constants.dart';
 import '../../../providers/project_provider.dart';
 import 'project_card.dart';
 
@@ -16,7 +17,7 @@ class _ProjectListState extends State<ProjectList> {
     final projects = context.watch<ProjectProvider>().projects.keys.toList();
 
     return projects.isEmpty
-        ? Center(child: Text('Keine Projekte vorhanden.'))
+        ? const Center(child: Text(Constants.NO_PROJECTS_AVAILABLE))
         : ListView.builder(
             itemCount: projects.length,
             scrollDirection: Axis.vertical,

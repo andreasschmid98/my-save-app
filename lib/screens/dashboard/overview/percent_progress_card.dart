@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:savings_tracker_app/screens/shared/constants.dart';
 
 class PercentProgressCard extends StatelessWidget {
   const PercentProgressCard({
@@ -26,10 +27,8 @@ class PercentProgressCard extends StatelessWidget {
             FittedBox(
               fit: BoxFit.fitWidth,
               child: Text(
-                (savingStatusInPercent * 100)
-                    .toStringAsFixed(0) +
-                    '%',
-                style: TextStyle(fontSize: 30),
+                '${(savingStatusInPercent * 100).toStringAsFixed(0)}${Constants.PERCENT}',
+                style: const TextStyle(fontSize: 30),
               ),
             ),
           ],

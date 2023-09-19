@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
-import 'package:uuid/uuid.dart';
 
-import '../../../models/project.dart';
-import '../../shared/constants.dart';
+import 'package:savings_tracker_app/screens/shared/constants.dart';
 
 class AddProject extends StatefulWidget {
   const AddProject({super.key});
@@ -26,31 +24,32 @@ class _AddProjectState extends State<AddProject> {
           child: Form(
               key: _formKey,
               child: Container(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(children: <Widget>[
                   const SizedBox(height: 20.0),
                   TextFormField(
-                    decoration: textInputDecoration.copyWith(
-                        hintText: 'Titel',
-                        prefixIcon: Icon(Icons.description_outlined)),
-                    validator: (val) =>
-                    val!.isEmpty
-                        ? 'Welchen Titel soll Dein Projekt haben?'
-                        : null,
-                    onChanged: (val) {
-                      setState(() => title = val);
+                    decoration: Constants.textInputDecoration.copyWith(
+                        hintText: Constants.TITEL,
+                        prefixIcon: const Icon(Icons.description_outlined)),
+                    validator: (titleInput) =>
+                        titleInput!.isEmpty ? Constants.TITLE_REMINDER : null,
+                    onChanged: (titleInput) {
+                      setState(() => title = titleInput);
                     },
                   ),
                   const SizedBox(height: 20.0),
                   TextFormField(
                     keyboardType: TextInputType.number,
-                    decoration: textInputDecoration.copyWith(
-                        hintText: 'Sparziel',
-                        prefixIcon: Icon(Icons.euro_rounded)),
-                    validator: (val) =>
-                    val!.isEmpty ? 'Was ist Dein Sparziel?' : null,
-                    onChanged: (val) {
-                      setState(() => savingsGoal = double.parse(val));
+                    decoration: Constants.textInputDecoration.copyWith(
+                        hintText: Constants.SAVINGS_GOAL,
+                        prefixIcon: const Icon(Icons.euro_rounded)),
+                    validator: (savingsGoalInput) =>
+                        _savingsGoalInputIsValid(savingsGoalInput!)
+                            ? null
+                            : Constants.SAVINGS_GOAL_REMINDER,
+                    onChanged: (savingsGoalInput) {
+                      setState(() => savingsGoal =
+                          double.parse(savingsGoalInput.replaceAll(',', '.')));
                     },
                   ),
                   const SizedBox(height: 20.0),
@@ -59,13 +58,18 @@ class _AddProjectState extends State<AddProject> {
                         if (_formKey.currentState!.validate()) {
                           await context
                               .read<ProjectProvider>()
-                              .createProject(title, savingsGoal).then((response) =>
-                              Navigator.pop(context));
+                              .createProject(title, savingsGoal)
+                              .then((response) => Navigator.pop(context));
                         }
                       },
-                      child: const Text('Projekt erstellen'))
+                      child: const Text(Constants.CREATE_PROJECT))
                 ]),
               ))),
     );
+  }
+
+  bool _savingsGoalInputIsValid(String savingsGoalInput) {
+    return savingsGoalInput.isNotEmpty &&
+        double.tryParse(savingsGoalInput.replaceAll(',', '.')) != null;
   }
 }

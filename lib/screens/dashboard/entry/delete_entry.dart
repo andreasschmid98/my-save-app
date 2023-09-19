@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:savings_tracker_app/screens/shared/constants.dart';
 
 import '../../../models/entry.dart';
 import '../../../providers/project_provider.dart';
@@ -14,14 +15,14 @@ class DeleteEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         height: 120,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              Text('${entry.description} wirklich löschen?'),
-              SizedBox(
+              Text('${entry.description} ${Constants.DELETE}'),
+              const SizedBox(
                 height: 15,
               ),
               Row(
@@ -34,12 +35,12 @@ class DeleteEntry extends StatelessWidget {
                             .deleteEntryById(entry.id)
                             .then((response) => Navigator.pop(context));
                       },
-                      child: const Text('Ja')),
+                      child: const Text(Constants.YES)),
                   FilledButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text('Nein'))
+                      child: const Text(Constants.NO))
                 ],
               )
             ],

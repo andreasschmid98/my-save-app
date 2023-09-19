@@ -3,11 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'package:savings_tracker_app/screens/dashboard/overview/percent_progress_card.dart';
 import 'package:savings_tracker_app/screens/dashboard/overview/savings_information_card.dart';
+import 'package:savings_tracker_app/screens/shared/constants.dart';
 import '../../../services/dashboard_service.dart';
-import '../../shared/loading.dart';
 
 class ProgressOverview extends StatelessWidget {
-  ProgressOverview({super.key});
+  const ProgressOverview({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +16,10 @@ class ProgressOverview extends StatelessWidget {
     final totalSavings = DashboardService().calculateTotalSavings(entries!);
     final savingsStatusInPercent = DashboardService()
         .calculateSavingsStatusInPercent(entries, project!.savingsGoal);
-    final remainingAmount = DashboardService()
-        .calculateRemainingAmount(entries, project!.savingsGoal);
+    final remaining = DashboardService()
+        .calculateRemainingAmount(entries, project.savingsGoal);
 
-    return Container(
+    return SizedBox(
       height: 700,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -30,26 +30,27 @@ class ProgressOverview extends StatelessWidget {
             child: PercentProgressCard(
                 savingStatusInPercent: savingsStatusInPercent),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Flexible(
             flex: 1,
             child: Row(
               children: [
                 Flexible(
                     child: SavingsInformationCard(
-                        infoNumber: totalSavings, infoText: 'gespart')),
-                SizedBox(width: 15),
+                        amount: totalSavings, description: Constants.SAVED)),
+                const SizedBox(width: 15),
                 Flexible(
                     child: SavingsInformationCard(
-                        infoNumber: remainingAmount, infoText: 'offen')),
-                SizedBox(width: 15),
+                        amount: remaining, description: Constants.OPEN)),
+                const SizedBox(width: 15),
                 Flexible(
                     child: SavingsInformationCard(
-                        infoNumber: project!.savingsGoal, infoText: 'Ziel')),
+                        amount: project.savingsGoal,
+                        description: Constants.GOAL)),
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 80,
           )
         ],

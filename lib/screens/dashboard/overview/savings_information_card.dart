@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:savings_tracker_app/screens/shared/constants.dart';
 
 class SavingsInformationCard extends StatelessWidget {
   const SavingsInformationCard({
     super.key,
-    required this.infoNumber,
-    required this.infoText,
+    required this.amount,
+    required this.description,
   });
 
-  final double infoNumber;
-  final String infoText;
+  final double amount;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 100,
       child: Card(
         child: Center(
@@ -25,15 +26,14 @@ class SavingsInformationCard extends StatelessWidget {
                 FittedBox(
                   fit: BoxFit.fill,
                   child: Text(
-                    infoNumber.toStringAsFixed(2) + ' €',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    '${amount.toStringAsFixed(2)} ${Constants.EURO}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Text(
-                  infoText.toUpperCase(),
-                  style: TextStyle(fontSize: 15),
-                  // Die FontWeight-Eigenschaft wurde hinzugefügt, um den Text fett darzustellen.
+                  description.toUpperCase(),
+                  style: const TextStyle(fontSize: 15),
                 ),
               ],
             ),

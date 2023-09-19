@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:savings_tracker_app/screens/shared/constants.dart';
 
 import '../../../providers/project_provider.dart';
 import 'entry_card.dart';
@@ -18,7 +19,7 @@ class _EntryListState extends State<EntryList> {
     final entries = context.watch<ProjectProvider>().projects[project];
 
     return entries!.isEmpty
-        ? Center(child: Text('Keine Einträge vorhanden.'))
+        ? const Center(child: Text(Constants.NO_ENTRIES_AVAILABLE))
         : ListView.builder(
             itemCount: entries.length,
             scrollDirection: Axis.vertical,
