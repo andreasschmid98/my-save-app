@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:savings_tracker_app/screens/dashboard/entry/delete_entry.dart';
+import 'package:savings_tracker_app/screens/shared/constants.dart';
 
 import '../../../models/entry.dart';
 
@@ -36,13 +38,30 @@ class EntryCard extends StatelessWidget {
               ),
               Expanded(
                 flex: 1,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    '${entry.saved.toStringAsFixed(2)} €',
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        '${entry.saved.toStringAsFixed(2)} ${Constants.EURO}',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 3.0),
+                        child: Text(
+                          DateFormat('dd.MM.yyyy').format(entry.createdAt),
+                          style: TextStyle(
+                            fontSize: 10.0,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
             ],
