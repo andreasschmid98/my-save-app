@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
+import 'package:savings_tracker_app/screens/shared/constants.dart';
 import 'package:savings_tracker_app/services/dashboard_service.dart';
 import '../../../models/project.dart';
 import 'delete_project.dart';
 
 class ProjectCard extends StatelessWidget {
-  Project project;
+  final Project project;
 
-  ProjectCard({required this.project, Key? key}) : super(key: key);
+  const ProjectCard({required this.project, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class ProjectCard extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                      '${(savingsStatusInPercent * 100).toStringAsFixed(0)}%'),
+                      '${(savingsStatusInPercent * 100).toStringAsFixed(0)}${Constants.PERCENT}'),
                 ),
               ),
             ],
@@ -68,4 +69,3 @@ class ProjectCard extends StatelessWidget {
     );
   }
 }
-

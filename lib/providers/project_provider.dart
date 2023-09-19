@@ -16,37 +16,37 @@ class ProjectProvider with ChangeNotifier {
   Map<Project, List<Entry>> projects = {};
 
   void initialize() async {
-    projects = await _refreshProjects();
+    projects = await _getRefreshedProjects();
     initialized = true;
     notifyListeners();
   }
 
   Future<void> createProject(String title, double savingsGoal) async {
     await _projectRepository.createProject(title, savingsGoal);
-    projects = await _refreshProjects();
+    projects = await _getRefreshedProjects();
     notifyListeners();
   }
 
   Future<void> deleteProjectById(int id) async {
     await _projectRepository.deleteProjectById(id);
-    projects = await _refreshProjects();
+    projects = await _getRefreshedProjects();
     notifyListeners();
   }
 
   Future<void> createEntry(
       String description, int projectId, double saved) async {
     await _entryRepository.createEntry(description, projectId, saved);
-    projects = await _refreshProjects();
+    projects = await _getRefreshedProjects();
     notifyListeners();
   }
 
   Future<void> deleteEntryById(int id) async {
     await _entryRepository.deleteEntryById(id);
-    projects = await _refreshProjects();
+    projects = await _getRefreshedProjects();
     notifyListeners();
   }
 
-  Future<Map<Project, List<Entry>>> _refreshProjects() async {
+  Future<Map<Project, List<Entry>>> _getRefreshedProjects() async {
     Map<Project, List<Entry>> projectsMap = {};
     final allProjects = await _projectRepository.getAllProjects();
 

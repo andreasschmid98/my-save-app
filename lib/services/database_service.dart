@@ -31,7 +31,8 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   CREATE TABLE projects(
   id INTEGER PRIMARY KEY NOT NULL,
   title TEXT,
-  savingsGoal REAL
+  savingsGoal REAL,
+  createdAt TEXT
   )
   ''');
     db.execute('''
@@ -39,6 +40,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   id INTEGER PRIMARY KEY NOT NULL,
   description TEXT,
   saved REAL,
+  createdAt TEXT,
   projectId INTEGER
   )
   ''');
@@ -121,7 +123,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
     final entriesAsMap = await db.query(DatabaseService._ENTRIES_TABLE,
         where: 'projectId = ?', whereArgs: [projectId]);
 
-    if(entriesAsMap.isEmpty) return [];
+    if (entriesAsMap.isEmpty) return [];
 
     return entriesAsMap.map((entryAsMap) {
       return Entry.fromMap(entryAsMap);

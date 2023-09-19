@@ -41,6 +41,8 @@ dependencies:
   provider: ^6.0.5
   get_it: ^7.6.4
   uuid: ^4.0.0
+  syncfusion_flutter_charts: ^22.2.12
+  fl_chart: ^0.63.0
 
 dev_dependencies:
   flutter_test:
