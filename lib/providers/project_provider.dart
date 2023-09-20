@@ -21,8 +21,8 @@ class ProjectProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> createProject(String title, double savingsGoal) async {
-    await _projectRepository.createProject(title, savingsGoal);
+  Future<void> createProject(String title, double savingsGoal, String currency) async {
+    await _projectRepository.createProject(title, savingsGoal, currency);
     projects = await _getRefreshedProjects();
     notifyListeners();
   }

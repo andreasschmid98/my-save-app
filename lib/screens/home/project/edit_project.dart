@@ -4,6 +4,7 @@ import 'package:savings_tracker_app/providers/project_provider.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../models/currency.dart';
 import '../../../models/project.dart';
 
 class EditProject extends StatefulWidget {
@@ -20,6 +21,7 @@ class _EditProjectState extends State<EditProject> {
 
   String? title;
   double? savingsGoal;
+  Currency? currency;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class _EditProjectState extends State<EditProject> {
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
                         hintText: AppLocalizations.of(context).savingsGoal,
-                        prefixIcon: const Icon(Icons.euro_rounded)),
+                        prefixIcon: const Icon(Icons.check_circle_rounded)),
                     validator: (savingsGoalInput) =>
                         _savingsGoalInputIsValid(savingsGoalInput!)
                             ? null
@@ -62,6 +64,34 @@ class _EditProjectState extends State<EditProject> {
                     },
                   ),
                   const SizedBox(height: 20.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField<Currency>(
+                          value: Currency.values.firstWhere((currency) => currency.symbol == widget.project.currency),
+                          hint: Text(AppLocalizations.of(context).currency),
+                          onChanged: (Currency? selectedCurrency) {
+                            setState(() {
+                              currency = selectedCurrency!;
+                            });
+                          },
+                          items: Currency.values
+                              .map<DropdownMenuItem<Currency>>(
+                                  (Currency currency) {
+                            return DropdownMenuItem<Currency>(
+                              value: currency,
+                              child: Text('${currency.symbol} (${currency.abbreviation})'),
+                            );
+                          }).toList(),
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            prefixIcon: Icon(Icons.currency_exchange_outlined),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20.0),
                   FilledButton(
                       onPressed: () async {
                         title = title ?? widget.project.title;
@@ -69,7 +99,8 @@ class _EditProjectState extends State<EditProject> {
                         Project project = Project(
                             id: widget.project.id,
                             title: title!,
-                            savingsGoal: savingsGoal!);
+                            savingsGoal: savingsGoal!,
+                        currency: currency!.symbol);
 
                         if (_formKey.currentState!.validate()) {
                           await context

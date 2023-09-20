@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/screens/dashboard/entry/delete_entry.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../models/entry.dart';
+import '../../../providers/project_provider.dart';
 
 class EntryCard extends StatelessWidget {
   final Entry entry;
@@ -13,6 +15,8 @@ class EntryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final project = context.watch<ProjectProvider>().currentProject;
+
     return InkWell(
         onLongPress: () {
           showModalBottomSheet(
@@ -44,7 +48,7 @@ class EntryCard extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        '${entry.saved.toStringAsFixed(2)} ${AppLocalizations.of(context).euro}',
+                        '${entry.saved.toStringAsFixed(2)} ${project!.currency}',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),

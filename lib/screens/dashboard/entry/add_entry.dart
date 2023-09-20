@@ -45,7 +45,7 @@ class _AddEntryState extends State<AddEntry> {
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
                         hintText: AppLocalizations.of(context).amount,
-                        prefixIcon: const Icon(Icons.euro_rounded)),
+                        prefixIcon: const Icon(Icons.money)),
                     validator: (amountInput) =>
                         _amountInputIsValid(amountInput!)
                             ? null

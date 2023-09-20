@@ -20,11 +20,11 @@
   "createEntry": "Eintrag erstellen",
   "newEntry": "Neuer Eintrag",
   "noEntriesAvailable": "Keine Einträge vorhanden.",
-  "euro": "€",
   "percent": "%",
   "saved": "gespart",
   "open": "offen",
   "goal": "Ziel",
-  "saveChanges": "Änderungen speichern"
+  "saveChanges": "Änderungen speichern",
+  "currency": "Währung"
 }
 

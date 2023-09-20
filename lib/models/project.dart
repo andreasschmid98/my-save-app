@@ -3,11 +3,13 @@ class Project {
   final String title;
   final double savingsGoal;
   final DateTime createdAt;
+  final String currency;
 
   Project({
     required this.id,
     required this.title,
     required this.savingsGoal,
+    required this.currency,
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime.now();
 
@@ -16,6 +18,7 @@ class Project {
         id: map['id'] as int,
         title: map['title'] as String,
         savingsGoal: map['savingsGoal'] as double,
+        currency: map['currency'] as String,
         createdAt: DateTime.parse(map['createdAt'] as String));
   }
 
@@ -24,6 +27,7 @@ class Project {
       'id': id,
       'title': title,
       'savingsGoal': savingsGoal,
+      'currency': currency,
       'createdAt': createdAt.toString()
     };
   }
