@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:path/path.dart';
 import 'package:savings_tracker_app/models/entry.dart';
 import 'package:savings_tracker_app/models/project.dart';
@@ -6,8 +8,9 @@ import 'package:savings_tracker_app/repositories/project_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService implements ProjectRepository, EntryRepository {
-  static int nextProjectId = 1;
-  static int nextEntryId = 1;
+  Set<int> activeProjectIds = {};
+  Set<int> activeEntryIds = {};
+
   static const String _PROJECTS_TABLE = 'projects';
   static const String _ENTRIES_TABLE = 'entries';
 
@@ -49,7 +52,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   @override
   Future<Project> createProject(String title, double savingsGoal) async {
     Project project =
-        Project(id: nextProjectId++, title: title, savingsGoal: savingsGoal);
+        Project(id: _createNextProjectId(), title: title, savingsGoal: savingsGoal);
     final Database db = await _getDatabase();
     final id = await db.insert(DatabaseService._PROJECTS_TABLE, project.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
@@ -97,7 +100,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   Future<Entry> createEntry(
       String description, int projectId, double saved) async {
     Entry entry = Entry(
-        id: nextEntryId++,
+        id: _createNextEntryId(),
         projectId: projectId,
         description: description,
         saved: saved);
@@ -137,5 +140,25 @@ class DatabaseService implements ProjectRepository, EntryRepository {
     return entriesAsMap.map((entryAsMap) {
       return Entry.fromMap(entryAsMap);
     }).toList();
+  }
+
+  int _createNextProjectId() {
+    final random = Random();
+    int id = random.nextInt(10000).abs();
+    while (activeProjectIds.contains(id)) {
+      id = random.nextInt(10000).abs();
+    }
+    activeProjectIds.add(id);
+    return id;
+  }
+
+  int _createNextEntryId() {
+    final random = Random();
+    int id = random.nextInt(10000).abs();
+    while (activeEntryIds.contains(id)) {
+      id = random.nextInt(10000).abs();
+    }
+    activeEntryIds.add(id);
+    return id;
   }
 }
