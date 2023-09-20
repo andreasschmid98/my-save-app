@@ -22,7 +22,7 @@ class DeleteEntry extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                  '${entry.description} ${AppLocalizations.of(context).delete}'),
+                  AppLocalizations.of(context).deleteEntry),
               const SizedBox(
                 height: 15,
               ),
