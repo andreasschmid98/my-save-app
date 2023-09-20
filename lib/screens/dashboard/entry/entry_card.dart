@@ -3,8 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/screens/dashboard/entry/delete_entry.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../../models/entry.dart';
 import '../../../providers/project_provider.dart';
 

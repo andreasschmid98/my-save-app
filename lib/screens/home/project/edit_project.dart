@@ -68,7 +68,8 @@ class _EditProjectState extends State<EditProject> {
                     children: [
                       Expanded(
                         child: DropdownButtonFormField<Currency>(
-                          value: Currency.values.firstWhere((currency) => currency.symbol == widget.project.currency),
+                          value: Currency.values.firstWhere((currency) =>
+                              currency.symbol == widget.project.currency),
                           hint: Text(AppLocalizations.of(context).currency),
                           onChanged: (Currency? selectedCurrency) {
                             setState(() {
@@ -80,7 +81,8 @@ class _EditProjectState extends State<EditProject> {
                                   (Currency currency) {
                             return DropdownMenuItem<Currency>(
                               value: currency,
-                              child: Text('${currency.symbol} (${currency.abbreviation})'),
+                              child: Text(
+                                  '${currency.symbol} (${currency.abbreviation})'),
                             );
                           }).toList(),
                           decoration: const InputDecoration(
@@ -100,7 +102,7 @@ class _EditProjectState extends State<EditProject> {
                             id: widget.project.id,
                             title: title!,
                             savingsGoal: savingsGoal!,
-                        currency: currency!.symbol);
+                            currency: currency!.symbol);
 
                         if (_formKey.currentState!.validate()) {
                           await context

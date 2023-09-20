@@ -21,8 +21,7 @@ class DeleteEntry extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              Text(
-                  AppLocalizations.of(context).deleteEntry),
+              Text(AppLocalizations.of(context).deleteEntry),
               const SizedBox(
                 height: 15,
               ),

@@ -7,7 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'screens/dashboard/dashboard.dart';
 
 void main() {
-  runApp(WeSaveApp());
+  runApp(const WeSaveApp());
 }
 
 class WeSaveApp extends StatelessWidget {
@@ -34,10 +34,10 @@ class WeSaveApp extends StatelessWidget {
               useMaterial3: true,
               colorSchemeSeed: Colors.green,
               brightness: Brightness.light),
-          home: Home(),
+          home: const Home(),
           routes: {
-            '/home': (context) => Home(),
-            '/dashboard': (context) => Dashboard(),
+            '/home': (context) => const Home(),
+            '/dashboard': (context) => const Dashboard(),
           }),
     );
   }

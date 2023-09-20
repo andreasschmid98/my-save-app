@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'package:savings_tracker_app/screens/home/project/edit_project.dart';
 
-import 'entry/add_entry.dart';
+import 'entry/create_entry.dart';
 import 'entry/entry_list.dart';
 import 'overview/progress_overview.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -65,7 +65,7 @@ class Dashboard extends StatelessWidget {
             showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return const AddEntry();
+                  return const CreateEntry();
                 });
           },
           label: Text(AppLocalizations.of(context).newEntry),

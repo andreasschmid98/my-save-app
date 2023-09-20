@@ -51,9 +51,13 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   }
 
   @override
-  Future<Project> createProject(String title, double savingsGoal, String currency) async {
-    Project project =
-        Project(id: _createNextProjectId(), title: title, savingsGoal: savingsGoal, currency: currency);
+  Future<Project> createProject(
+      String title, double savingsGoal, String currency) async {
+    Project project = Project(
+        id: _createNextProjectId(),
+        title: title,
+        savingsGoal: savingsGoal,
+        currency: currency);
     final Database db = await _getDatabase();
     final id = await db.insert(DatabaseService._PROJECTS_TABLE, project.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);

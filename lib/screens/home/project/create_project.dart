@@ -4,14 +4,14 @@ import 'package:savings_tracker_app/models/currency.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AddProject extends StatefulWidget {
-  const AddProject({super.key});
+class CreateProject extends StatefulWidget {
+  const CreateProject({super.key});
 
   @override
-  State<AddProject> createState() => _AddProjectState();
+  State<CreateProject> createState() => _CreateProjectState();
 }
 
-class _AddProjectState extends State<AddProject> {
+class _CreateProjectState extends State<CreateProject> {
   final _formKey = GlobalKey<FormState>();
 
   String title = '';
@@ -70,11 +70,12 @@ class _AddProjectState extends State<AddProject> {
                           items: Currency.values
                               .map<DropdownMenuItem<Currency>>(
                                   (Currency currency) {
-                                return DropdownMenuItem<Currency>(
-                                  value: currency,
-                                  child: Text('${currency.symbol} (${currency.abbreviation})'),
-                                );
-                              }).toList(),
+                            return DropdownMenuItem<Currency>(
+                              value: currency,
+                              child: Text(
+                                  '${currency.symbol} (${currency.abbreviation})'),
+                            );
+                          }).toList(),
                           decoration: const InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
                             prefixIcon: Icon(Icons.currency_exchange_outlined),
@@ -89,7 +90,8 @@ class _AddProjectState extends State<AddProject> {
                         if (_formKey.currentState!.validate()) {
                           await context
                               .read<ProjectProvider>()
-                              .createProject(title, savingsGoal, currency.symbol)
+                              .createProject(
+                                  title, savingsGoal, currency.symbol)
                               .then((response) => Navigator.pop(context));
                         }
                       },

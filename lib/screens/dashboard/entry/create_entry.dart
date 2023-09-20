@@ -4,14 +4,14 @@ import '../../../providers/project_provider.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class AddEntry extends StatefulWidget {
-  const AddEntry({super.key});
+class CreateEntry extends StatefulWidget {
+  const CreateEntry({super.key});
 
   @override
-  State<AddEntry> createState() => _AddEntryState();
+  State<CreateEntry> createState() => _CreateEntryState();
 }
 
-class _AddEntryState extends State<AddEntry> {
+class _CreateEntryState extends State<CreateEntry> {
   final _formKey = GlobalKey<FormState>();
 
   String description = '';
