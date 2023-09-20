@@ -30,7 +30,7 @@ class EntryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: ListTile(
                   title: Text(
                     entry.description,
@@ -56,7 +56,7 @@ class EntryCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 3.0),
                         child: Text(
-                          DateFormat('dd.MM.yyyy').format(entry.createdAt),
+                          DateFormat('dd. MMM. y').format(entry.createdAt),
                           style: TextStyle(
                             fontSize: 10.0,
                             color: Colors.grey[500],
