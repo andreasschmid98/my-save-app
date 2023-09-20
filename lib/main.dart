@@ -26,6 +26,9 @@ class WeSaveApp extends StatelessWidget {
           ],
           supportedLocales: const [
             Locale('de'),
+            Locale('en'),
+            Locale('es'),
+            Locale('fr')
           ],
           theme: ThemeData(
               useMaterial3: true,
