@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
-import 'package:savings_tracker_app/screens/shared/constants.dart';
 import 'package:savings_tracker_app/services/dashboard_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../models/project.dart';
 import 'delete_project.dart';
 
@@ -59,7 +59,7 @@ class ProjectCard extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                      '${(savingsStatusInPercent * 100).toStringAsFixed(0)}${Constants.PERCENT}'),
+                      '${(savingsStatusInPercent * 100).toStringAsFixed(0)}${AppLocalizations.of(context).percent}'),
                 ),
               ),
             ],

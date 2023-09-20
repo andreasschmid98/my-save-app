@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:savings_tracker_app/screens/shared/constants.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PercentProgressCard extends StatelessWidget {
   const PercentProgressCard({
@@ -27,7 +28,7 @@ class PercentProgressCard extends StatelessWidget {
             FittedBox(
               fit: BoxFit.fitWidth,
               child: Text(
-                '${(savingStatusInPercent * 100).toStringAsFixed(0)}${Constants.PERCENT}',
+                '${(savingStatusInPercent * 100).toStringAsFixed(0)}${AppLocalizations.of(context).percent}',
                 style: const TextStyle(fontSize: 30),
               ),
             ),

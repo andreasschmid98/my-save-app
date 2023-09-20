@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:savings_tracker_app/screens/shared/constants.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SavingsInformationCard extends StatelessWidget {
   const SavingsInformationCard({
@@ -26,7 +27,7 @@ class SavingsInformationCard extends StatelessWidget {
                 FittedBox(
                   fit: BoxFit.fill,
                   child: Text(
-                    '${amount.toStringAsFixed(2)} ${Constants.EURO}',
+                    '${amount.toStringAsFixed(2)} ${AppLocalizations.of(context).euro}',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),

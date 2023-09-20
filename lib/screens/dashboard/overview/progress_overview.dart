@@ -3,8 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'package:savings_tracker_app/screens/dashboard/overview/percent_progress_card.dart';
 import 'package:savings_tracker_app/screens/dashboard/overview/savings_information_card.dart';
-import 'package:savings_tracker_app/screens/shared/constants.dart';
+
 import '../../../services/dashboard_service.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProgressOverview extends StatelessWidget {
   const ProgressOverview({super.key});
@@ -37,16 +38,18 @@ class ProgressOverview extends StatelessWidget {
               children: [
                 Flexible(
                     child: SavingsInformationCard(
-                        amount: totalSavings, description: Constants.SAVED)),
+                        amount: totalSavings,
+                        description: AppLocalizations.of(context).saved)),
                 const SizedBox(width: 15),
                 Flexible(
                     child: SavingsInformationCard(
-                        amount: remaining, description: Constants.OPEN)),
+                        amount: remaining,
+                        description: AppLocalizations.of(context).open)),
                 const SizedBox(width: 15),
                 Flexible(
                     child: SavingsInformationCard(
                         amount: project.savingsGoal,
-                        description: Constants.GOAL)),
+                        description: AppLocalizations.of(context).goal)),
               ],
             ),
           ),

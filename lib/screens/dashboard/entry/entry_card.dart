@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:savings_tracker_app/screens/dashboard/entry/delete_entry.dart';
-import 'package:savings_tracker_app/screens/shared/constants.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../models/entry.dart';
 
@@ -43,7 +44,7 @@ class EntryCard extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        '${entry.saved.toStringAsFixed(2)} ${Constants.EURO}',
+                        '${entry.saved.toStringAsFixed(2)} ${AppLocalizations.of(context).euro}',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),

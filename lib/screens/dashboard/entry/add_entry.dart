@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/project_provider.dart';
-import '../../shared/constants.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddEntry extends StatefulWidget {
   const AddEntry({super.key});
@@ -27,11 +28,12 @@ class _AddEntryState extends State<AddEntry> {
                 child: Column(children: <Widget>[
                   const SizedBox(height: 20.0),
                   TextFormField(
-                    decoration: Constants.textInputDecoration.copyWith(
-                        hintText: Constants.DESCRIPTION,
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(10.0),
+                        hintText: AppLocalizations.of(context).description,
                         prefixIcon: const Icon(Icons.description_outlined)),
                     validator: (descriptionInput) => descriptionInput!.isEmpty
-                        ? Constants.DESCRIPTION_REMINDER
+                        ? AppLocalizations.of(context).descriptionReminder
                         : null,
                     onChanged: (descriptionInput) {
                       setState(() => description = descriptionInput);
@@ -40,13 +42,14 @@ class _AddEntryState extends State<AddEntry> {
                   const SizedBox(height: 20.0),
                   TextFormField(
                     keyboardType: TextInputType.number,
-                    decoration: Constants.textInputDecoration.copyWith(
-                        hintText: Constants.AMOUNT,
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(10.0),
+                        hintText: AppLocalizations.of(context).amount,
                         prefixIcon: const Icon(Icons.euro_rounded)),
                     validator: (amountInput) =>
                         _amountInputIsValid(amountInput!)
                             ? null
-                            : Constants.AMOUNT_REMINDER,
+                            : AppLocalizations.of(context).amountReminder,
                     onChanged: (amountInput) {
                       setState(() => saved =
                           double.parse(amountInput.replaceAll(',', '.')));
@@ -66,7 +69,7 @@ class _AddEntryState extends State<AddEntry> {
                               .then((response) => Navigator.pop(context));
                         }
                       },
-                      child: const Text(Constants.CREATE_ENTRY))
+                      child: Text(AppLocalizations.of(context).createEntry))
                 ]),
               ))),
     );

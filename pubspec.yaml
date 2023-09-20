@@ -43,7 +43,9 @@ dependencies:
   uuid: ^4.0.0
   syncfusion_flutter_charts: ^22.2.12
   fl_chart: ^0.63.0
-  intl: ^0.18.1
+  intl: any
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -97,3 +99,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  generate: true

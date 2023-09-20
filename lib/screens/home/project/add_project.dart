@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
-
-import 'package:savings_tracker_app/screens/shared/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddProject extends StatefulWidget {
   const AddProject({super.key});
@@ -28,11 +27,13 @@ class _AddProjectState extends State<AddProject> {
                 child: Column(children: <Widget>[
                   const SizedBox(height: 20.0),
                   TextFormField(
-                    decoration: Constants.textInputDecoration.copyWith(
-                        hintText: Constants.TITEL,
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(10.0),
+                        hintText: AppLocalizations.of(context).title,
                         prefixIcon: const Icon(Icons.description_outlined)),
-                    validator: (titleInput) =>
-                        titleInput!.isEmpty ? Constants.TITLE_REMINDER : null,
+                    validator: (titleInput) => titleInput!.isEmpty
+                        ? AppLocalizations.of(context).titleReminder
+                        : null,
                     onChanged: (titleInput) {
                       setState(() => title = titleInput);
                     },
@@ -40,13 +41,14 @@ class _AddProjectState extends State<AddProject> {
                   const SizedBox(height: 20.0),
                   TextFormField(
                     keyboardType: TextInputType.number,
-                    decoration: Constants.textInputDecoration.copyWith(
-                        hintText: Constants.SAVINGS_GOAL,
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(10.0),
+                        hintText: AppLocalizations.of(context).savingsGoal,
                         prefixIcon: const Icon(Icons.euro_rounded)),
                     validator: (savingsGoalInput) =>
                         _savingsGoalInputIsValid(savingsGoalInput!)
                             ? null
-                            : Constants.SAVINGS_GOAL_REMINDER,
+                            : AppLocalizations.of(context).savingsGoalReminder,
                     onChanged: (savingsGoalInput) {
                       setState(() => savingsGoal =
                           double.parse(savingsGoalInput.replaceAll(',', '.')));
@@ -62,7 +64,7 @@ class _AddProjectState extends State<AddProject> {
                               .then((response) => Navigator.pop(context));
                         }
                       },
-                      child: const Text(Constants.CREATE_PROJECT))
+                      child: Text(AppLocalizations.of(context).createProject))
                 ]),
               ))),
     );

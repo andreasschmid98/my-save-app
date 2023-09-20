@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'package:savings_tracker_app/screens/home/project/edit_project.dart';
-import 'package:savings_tracker_app/screens/shared/constants.dart';
+
 import 'entry/add_entry.dart';
 import 'entry/entry_list.dart';
 import 'overview/progress_overview.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -35,15 +36,15 @@ class Dashboard extends StatelessWidget {
                   Icons.edit,
                 ))
           ],
-          bottom: const TabBar(
+          bottom: TabBar(
             tabs: <Widget>[
               Tab(
-                text: Constants.OVERVIEW,
-                icon: Icon(Icons.stacked_bar_chart),
+                text: AppLocalizations.of(context).overview,
+                icon: const Icon(Icons.stacked_bar_chart),
               ),
               Tab(
-                text: Constants.ENTIRES,
-                icon: Icon(Icons.format_list_bulleted),
+                text: AppLocalizations.of(context).entries,
+                icon: const Icon(Icons.format_list_bulleted),
               ),
             ],
           ),
@@ -67,7 +68,7 @@ class Dashboard extends StatelessWidget {
                   return const AddEntry();
                 });
           },
-          label: const Text(Constants.NEW_ENTRY),
+          label: Text(AppLocalizations.of(context).newEntry),
           icon: const Icon(Icons.add),
         ),
       ),

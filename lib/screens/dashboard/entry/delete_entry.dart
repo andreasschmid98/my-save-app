@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:savings_tracker_app/screens/shared/constants.dart';
 
 import '../../../models/entry.dart';
 import '../../../providers/project_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DeleteEntry extends StatelessWidget {
   const DeleteEntry({
@@ -21,7 +21,8 @@ class DeleteEntry extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              Text('${entry.description} ${Constants.DELETE}'),
+              Text(
+                  '${entry.description} ${AppLocalizations.of(context).delete}'),
               const SizedBox(
                 height: 15,
               ),
@@ -35,12 +36,12 @@ class DeleteEntry extends StatelessWidget {
                             .deleteEntryById(entry.id)
                             .then((response) => Navigator.pop(context));
                       },
-                      child: const Text(Constants.YES)),
+                      child: Text(AppLocalizations.of(context).yes)),
                   FilledButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text(Constants.NO))
+                      child: Text(AppLocalizations.of(context).no))
                 ],
               )
             ],

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'package:savings_tracker_app/screens/home/project/add_project.dart';
 import 'package:savings_tracker_app/screens/home/project/project_list.dart';
-import 'package:savings_tracker_app/screens/shared/constants.dart';
+
 import 'package:savings_tracker_app/screens/shared/loading.dart';
 
 class Home extends StatelessWidget {
@@ -16,8 +17,9 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Align(
-            alignment: Alignment.center, child: Text(Constants.ALL_PROJECTS)),
+        title: Align(
+            alignment: Alignment.center,
+            child: Text(AppLocalizations.of(context).allProjects)),
       ),
       body: !initialized
           ? const Loading()
@@ -31,7 +33,7 @@ class Home extends StatelessWidget {
                 return const AddProject();
               });
         },
-        label: const Text(Constants.NEW_PROJECT),
+        label: Text(AppLocalizations.of(context).createProject),
         icon: const Icon(Icons.add),
       ),
     );
