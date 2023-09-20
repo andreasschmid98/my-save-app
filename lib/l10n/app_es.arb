@@ -20,10 +20,10 @@
   "createEntry": "Crear Entrada",
   "newEntry": "Nueva Entrada",
   "noEntriesAvailable": "No hay entradas disponibles.",
-  "euro": "€",
   "percent": "%",
   "saved": "Guardado",
   "open": "Abierto",
   "goal": "Objetivo",
-  "saveChanges": "Guardar Cambios"
+  "saveChanges": "Guardar Cambios",
+  "currency": "Moneda"
 }

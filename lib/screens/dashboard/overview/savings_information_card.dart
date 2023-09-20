@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../../../providers/project_provider.dart';
 
 class SavingsInformationCard extends StatelessWidget {
   const SavingsInformationCard({
@@ -14,6 +16,8 @@ class SavingsInformationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final project = context.watch<ProjectProvider>().currentProject;
+
     return SizedBox(
       height: 100,
       child: Card(
@@ -27,7 +31,7 @@ class SavingsInformationCard extends StatelessWidget {
                 FittedBox(
                   fit: BoxFit.fill,
                   child: Text(
-                    '${amount.toStringAsFixed(2)} ${AppLocalizations.of(context).euro}',
+                    '${amount.toStringAsFixed(2)} ${project!.currency}',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),

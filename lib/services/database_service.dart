@@ -35,7 +35,8 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   id INTEGER PRIMARY KEY NOT NULL,
   title TEXT,
   savingsGoal REAL,
-  createdAt TEXT
+  createdAt TEXT,
+  currency TEXT
   )
   ''');
     db.execute('''
@@ -50,9 +51,9 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   }
 
   @override
-  Future<Project> createProject(String title, double savingsGoal) async {
+  Future<Project> createProject(String title, double savingsGoal, String currency) async {
     Project project =
-        Project(id: _createNextProjectId(), title: title, savingsGoal: savingsGoal);
+        Project(id: _createNextProjectId(), title: title, savingsGoal: savingsGoal, currency: currency);
     final Database db = await _getDatabase();
     final id = await db.insert(DatabaseService._PROJECTS_TABLE, project.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);

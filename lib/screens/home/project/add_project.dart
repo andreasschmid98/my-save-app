@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:savings_tracker_app/models/currency.dart';
 import 'package:savings_tracker_app/providers/project_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -15,6 +16,7 @@ class _AddProjectState extends State<AddProject> {
 
   String title = '';
   double savingsGoal = 0.0;
+  Currency currency = Currency.EUR;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class _AddProjectState extends State<AddProject> {
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
                         hintText: AppLocalizations.of(context).savingsGoal,
-                        prefixIcon: const Icon(Icons.euro_rounded)),
+                        prefixIcon: const Icon(Icons.check_circle_rounded)),
                     validator: (savingsGoalInput) =>
                         _savingsGoalInputIsValid(savingsGoalInput!)
                             ? null
@@ -55,12 +57,39 @@ class _AddProjectState extends State<AddProject> {
                     },
                   ),
                   const SizedBox(height: 20.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropdownButtonFormField<Currency>(
+                          hint: Text(AppLocalizations.of(context).currency),
+                          onChanged: (Currency? selectedCurrency) {
+                            setState(() {
+                              currency = selectedCurrency!;
+                            });
+                          },
+                          items: Currency.values
+                              .map<DropdownMenuItem<Currency>>(
+                                  (Currency currency) {
+                                return DropdownMenuItem<Currency>(
+                                  value: currency,
+                                  child: Text('${currency.symbol} (${currency.abbreviation})'),
+                                );
+                              }).toList(),
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            prefixIcon: Icon(Icons.currency_exchange_outlined),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20.0),
                   FilledButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           await context
                               .read<ProjectProvider>()
-                              .createProject(title, savingsGoal)
+                              .createProject(title, savingsGoal, currency.symbol)
                               .then((response) => Navigator.pop(context));
                         }
                       },

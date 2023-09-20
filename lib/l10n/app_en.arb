@@ -20,10 +20,10 @@
   "createEntry": "Create Entry",
   "newEntry": "New Entry",
   "noEntriesAvailable": "No entries available.",
-  "euro": "€",
   "percent": "%",
   "saved": "Saved",
   "open": "Open",
   "goal": "Goal",
-  "saveChanges": "Save Changes"
+  "saveChanges": "Save Changes",
+  "currency": "Currency"
 }
