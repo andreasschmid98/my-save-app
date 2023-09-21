@@ -4,7 +4,7 @@ my.save is a flutter app designed to help users take control of their savings ob
 
 ## Description
 
-With my.save, users can conveniently track their savings goals digitally. Users can create a separate project for each savings goal, add new entries and view the progress of all projects. my.save is available in multiple languages (EN, DE, ES, FR).
+With my.save, users can conveniently track their savings goals digitally. Users can create a separate project for each savings goal, add new entries and view the progress of all projects. my.save is available in multiple languages (EN, DE, ES, FR). The correct language will automatically be applied according to your systems language.
 
 ## Preview
 
