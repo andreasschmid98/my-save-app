@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:savings_tracker_app/screens/dashboard/entry/delete_entry.dart';
+import 'package:my_save_app/screens/dashboard/entry/delete_entry.dart';
 
 import '../../../models/entry.dart';
 import '../../../providers/project_provider.dart';

@@ -1,4 +1,4 @@
-package com.example.savings_tracker_app
+package com.example.my_save_app
 
 import io.flutter.embedding.android.FlutterActivity
 

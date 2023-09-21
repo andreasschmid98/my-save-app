@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:savings_tracker_app/providers/project_provider.dart';
-import 'package:savings_tracker_app/services/dashboard_service.dart';
+import 'package:my_save_app/providers/project_provider.dart';
+import 'package:my_save_app/services/dashboard_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../models/project.dart';
 import 'delete_project.dart';

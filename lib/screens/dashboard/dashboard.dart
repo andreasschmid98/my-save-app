@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:savings_tracker_app/providers/project_provider.dart';
-import 'package:savings_tracker_app/screens/home/project/edit_project.dart';
+import 'package:my_save_app/providers/project_provider.dart';
+import 'package:my_save_app/screens/home/project/edit_project.dart';
 
 import 'entry/create_entry.dart';
 import 'entry/entry_list.dart';

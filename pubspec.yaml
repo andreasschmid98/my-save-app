@@ -1,4 +1,4 @@
-name: savings_tracker_app
+name: my_save_app
 description: A simpe app to track savings goals.
 
 publish_to: 'none'
@@ -17,10 +17,6 @@ dependencies:
   sqflite: ^2.3.0
   path: ^1.8.3
   provider: ^6.0.5
-  get_it: ^7.6.4
-  uuid: ^4.0.0
-  syncfusion_flutter_charts: ^22.2.12
-  fl_chart: ^0.63.0
   intl: any
   flutter_localizations:
     sdk: flutter

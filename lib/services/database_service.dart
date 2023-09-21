@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:path/path.dart';
-import 'package:savings_tracker_app/models/entry.dart';
-import 'package:savings_tracker_app/models/project.dart';
-import 'package:savings_tracker_app/repositories/entry_repository.dart';
-import 'package:savings_tracker_app/repositories/project_repository.dart';
+import 'package:my_save_app/models/entry.dart';
+import 'package:my_save_app/models/project.dart';
+import 'package:my_save_app/repositories/entry_repository.dart';
+import 'package:my_save_app/repositories/project_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService implements ProjectRepository, EntryRepository {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:savings_tracker_app/models/project.dart';
-import 'package:savings_tracker_app/repositories/project_repository.dart';
-import 'package:savings_tracker_app/services/database_service.dart';
+import 'package:my_save_app/models/project.dart';
+import 'package:my_save_app/repositories/project_repository.dart';
+import 'package:my_save_app/services/database_service.dart';
 
 import '../models/entry.dart';
 import '../repositories/entry_repository.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:savings_tracker_app/providers/project_provider.dart';
-import 'package:savings_tracker_app/screens/home/home.dart';
+import 'package:my_save_app/providers/project_provider.dart';
+import 'package:my_save_app/screens/home/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'screens/dashboard/dashboard.dart';
 

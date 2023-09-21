@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:savings_tracker_app/providers/project_provider.dart';
-import 'package:savings_tracker_app/screens/dashboard/overview/percent_progress_card.dart';
-import 'package:savings_tracker_app/screens/dashboard/overview/savings_information_card.dart';
+import 'package:my_save_app/providers/project_provider.dart';
+import 'package:my_save_app/screens/dashboard/overview/percent_progress_card.dart';
+import 'package:my_save_app/screens/dashboard/overview/savings_information_card.dart';
 
 import '../../../services/dashboard_service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
