@@ -17,14 +17,13 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
             child: Image.asset(
               "assets/app_bar_icon.png",
             )),
-        title: Align(
-            alignment: Alignment.center,
-            child: Text(AppLocalizations.of(context).allProjects)),
+        title: Text(AppLocalizations.of(context).allProjects),
       ),
       body: !initialized
           ? const Loading()
