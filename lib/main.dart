@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:my_save_app/providers/project_provider.dart';
@@ -6,7 +7,12 @@ import 'package:my_save_app/screens/home/home.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'screens/dashboard/dashboard.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const WeSaveApp());
 }
 
