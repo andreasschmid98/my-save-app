@@ -62,6 +62,7 @@ class ProjectProvider with ChangeNotifier {
 
     for (var project in allProjects) {
       final entries = await _entryRepository.getEntriesByProjectId(project.id);
+      entries.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       projectsMap[project] = entries;
     }
     return projectsMap;
