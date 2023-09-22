@@ -33,6 +33,8 @@ class DeleteProject extends StatelessWidget {
                             .read<ProjectProvider>()
                             .deleteProjectById(project.id)
                             .then((response) => Navigator.pop(context));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(AppLocalizations.of(context).projectDeleted)));
                       },
                       child: Text(AppLocalizations.of(context).yes)),
                   FilledButton(
