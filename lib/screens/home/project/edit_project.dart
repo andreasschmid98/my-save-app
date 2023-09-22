@@ -98,12 +98,13 @@ class _EditProjectState extends State<EditProject> {
                       onPressed: () async {
                         title = title ?? widget.project.title;
                         savingsGoal = savingsGoal ?? widget.project.savingsGoal;
+                        String currencyAsString = currency?.symbol ?? widget.project.currency;
+
                         Project project = Project(
                             id: widget.project.id,
                             title: title!,
                             savingsGoal: savingsGoal!,
-                            currency: currency!.symbol);
-
+                            currency: currencyAsString);
                         if (_formKey.currentState!.validate()) {
                           await context
                               .read<ProjectProvider>()
