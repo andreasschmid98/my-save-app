@@ -41,12 +41,15 @@ class ProjectCard extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: 5,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        project.title,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right:5.0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          project.title,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
                       ),
                     ),
                   ),
