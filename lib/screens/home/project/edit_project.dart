@@ -104,7 +104,8 @@ class _EditProjectState extends State<EditProject> {
                             id: widget.project.id,
                             title: title!,
                             savingsGoal: savingsGoal!,
-                            currency: currencyAsString);
+                            currency: currencyAsString,
+                        createdAt: widget.project.createdAt);
                         if (_formKey.currentState!.validate()) {
                           await context
                               .read<ProjectProvider>()
