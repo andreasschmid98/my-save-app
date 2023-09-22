@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:my_save_app/providers/project_provider.dart';
 import 'package:my_save_app/services/dashboard_service.dart';
@@ -33,35 +34,48 @@ class ProjectCard extends StatelessWidget {
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: Column(
             children: [
-              Expanded(
-                flex: 5,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    project.title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        project.title,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 6,
+                    child: LinearProgressIndicator(
+                      value: savingsStatusInPercent,
+                      backgroundColor: Colors.grey,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                          '${(savingsStatusInPercent * 100).toStringAsFixed(0)}${AppLocalizations.of(context).percent}'),
+                    ),
+                  ),
+                ],
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text('${AppLocalizations.of(context).createdAt} ${DateFormat('dd. MMM. y').format(project.createdAt)}',
+                  style: TextStyle(
+                    fontSize: 10.0,
+                    color: Colors.grey[500],
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 6,
-                child: LinearProgressIndicator(
-                  value: savingsStatusInPercent,
-                  backgroundColor: Colors.grey,
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                      '${(savingsStatusInPercent * 100).toStringAsFixed(0)}${AppLocalizations.of(context).percent}'),
-                ),
-              ),
+              )
             ],
           ),
         ),

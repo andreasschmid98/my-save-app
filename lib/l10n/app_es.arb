@@ -27,5 +27,7 @@
   "open": "Abierto",
   "goal": "Objetivo",
   "saveChanges": "Guardar Cambios",
-  "currency": "Moneda"
+  "currency": "Moneda",
+  "currencyReminder": "¿En qué moneda te gustaría crear tu proyecto?",
+  "createdAt": "Creado el:"
 }

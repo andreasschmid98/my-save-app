@@ -16,7 +16,7 @@ class _CreateProjectState extends State<CreateProject> {
 
   String title = '';
   double savingsGoal = 0.0;
-  Currency currency = Currency.EUR;
+  Currency? currency;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +67,10 @@ class _CreateProjectState extends State<CreateProject> {
                               currency = selectedCurrency!;
                             });
                           },
+                          validator: (selectedCurrency) =>
+                          selectedCurrency != null
+                              ? null
+                              : AppLocalizations.of(context).currencyReminder,
                           items: Currency.values
                               .map<DropdownMenuItem<Currency>>(
                                   (Currency currency) {
@@ -91,7 +95,7 @@ class _CreateProjectState extends State<CreateProject> {
                           await context
                               .read<ProjectProvider>()
                               .createProject(
-                                  title, savingsGoal, currency.symbol)
+                                  title, savingsGoal, currency!.symbol)
                               .then((response) => Navigator.pop(context));
                         }
                       },

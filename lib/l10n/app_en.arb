@@ -27,5 +27,7 @@
   "open": "Open",
   "goal": "Goal",
   "saveChanges": "Save Changes",
-  "currency": "Currency"
+  "currency": "Currency",
+  "currencyReminder": "In which currency would you like to create your project?",
+  "createdAt": "Created at:"
 }

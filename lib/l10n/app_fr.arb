@@ -27,6 +27,8 @@
   "open": "Ouvert",
   "goal": "Objectif",
   "saveChanges": "Enregistrer les modifications",
-  "currency": "Devise"
+  "currency": "Devise",
+  "currencyReminder": "Dans quelle devise souhaitez-vous créer votre projet ?",
+  "createdAt": "Créé le :"
 }
 
