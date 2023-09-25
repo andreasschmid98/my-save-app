@@ -8,11 +8,12 @@ import 'package:my_save_app/repositories/project_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService implements ProjectRepository, EntryRepository {
-  Set<int> activeProjectIds = {};
-  Set<int> activeEntryIds = {};
+  final Set<int> _activeProjectIds = {};
+  final Set<int> _activeEntryIds = {};
 
   static const String _PROJECTS_TABLE = 'projects';
   static const String _ENTRIES_TABLE = 'entries';
+  static const int _MAX_ID = 100000;
 
   DatabaseService._();
 
@@ -59,7 +60,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
         savingsGoal: savingsGoal,
         currency: currency);
     final Database db = await _getDatabase();
-    final id = await db.insert(DatabaseService._PROJECTS_TABLE, project.toMap(),
+    final id = await db.insert(_PROJECTS_TABLE, project.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
 
     return getProjectById(id);
@@ -68,7 +69,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   @override
   Future<List<Project>> getAllProjects() async {
     final Database db = await _getDatabase();
-    final projectsAsMap = await db.query(DatabaseService._PROJECTS_TABLE);
+    final projectsAsMap = await db.query(_PROJECTS_TABLE);
 
     return projectsAsMap.map((projectAsMap) {
       return Project.fromMap(projectAsMap);
@@ -79,7 +80,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   Future<Project> getProjectById(int id) async {
     final Database db = await _getDatabase();
 
-    final projectAsMap = await db.query(DatabaseService._PROJECTS_TABLE,
+    final projectAsMap = await db.query(_PROJECTS_TABLE,
         where: 'id = ?', whereArgs: [id], limit: 1);
 
     return Project.fromMap(projectAsMap.first);
@@ -88,16 +89,14 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   @override
   Future<int> deleteProjectById(int id) async {
     final Database db = await _getDatabase();
-    await db.delete(DatabaseService._ENTRIES_TABLE,
-        where: 'projectId = ?', whereArgs: [id]);
-    return await db.delete(DatabaseService._PROJECTS_TABLE,
-        where: 'id = ?', whereArgs: [id]);
+    await db.delete(_ENTRIES_TABLE, where: 'projectId = ?', whereArgs: [id]);
+    return await db.delete(_PROJECTS_TABLE, where: 'id = ?', whereArgs: [id]);
   }
 
   @override
   Future<int> updateProject(Project project) async {
     final Database db = await _getDatabase();
-    return await db.update(DatabaseService._PROJECTS_TABLE, project.toMap(),
+    return await db.update(_PROJECTS_TABLE, project.toMap(),
         where: 'id = ?', whereArgs: [project.id]);
   }
 
@@ -110,7 +109,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
         description: description,
         saved: saved);
     final Database db = await _getDatabase();
-    final id = await db.insert(DatabaseService._ENTRIES_TABLE, entry.toMap(),
+    final id = await db.insert(_ENTRIES_TABLE, entry.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
 
     return getEntryById(id);
@@ -120,7 +119,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   Future<Entry> getEntryById(int id) async {
     final Database db = await _getDatabase();
 
-    final entryAsMap = await db.query(DatabaseService._ENTRIES_TABLE,
+    final entryAsMap = await db.query(_ENTRIES_TABLE,
         where: 'id = ?', whereArgs: [id], limit: 1);
 
     return Entry.fromMap(entryAsMap.first);
@@ -129,16 +128,15 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   @override
   Future<int> deleteEntryById(int id) async {
     final Database db = await _getDatabase();
-    return await db.delete(DatabaseService._ENTRIES_TABLE,
-        where: 'id = ?', whereArgs: [id]);
+    return await db.delete(_ENTRIES_TABLE, where: 'id = ?', whereArgs: [id]);
   }
 
   @override
   Future<List<Entry>> getEntriesByProjectId(int projectId) async {
     final Database db = await _getDatabase();
 
-    final entriesAsMap = await db.query(DatabaseService._ENTRIES_TABLE,
-        where: 'projectId = ?', whereArgs: [projectId]);
+    final entriesAsMap = await db
+        .query(_ENTRIES_TABLE, where: 'projectId = ?', whereArgs: [projectId]);
 
     if (entriesAsMap.isEmpty) return [];
 
@@ -150,20 +148,20 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   int _createNextProjectId() {
     final random = Random();
     int id = random.nextInt(10000).abs();
-    while (activeProjectIds.contains(id)) {
+    while (_activeProjectIds.contains(id)) {
       id = random.nextInt(10000).abs();
     }
-    activeProjectIds.add(id);
+    _activeProjectIds.add(id);
     return id;
   }
 
   int _createNextEntryId() {
     final random = Random();
-    int id = random.nextInt(100000).abs();
-    while (activeEntryIds.contains(id)) {
-      id = random.nextInt(100000).abs();
+    int id = random.nextInt(_MAX_ID).abs();
+    while (_activeEntryIds.contains(id)) {
+      id = random.nextInt(_MAX_ID).abs();
     }
-    activeEntryIds.add(id);
+    _activeEntryIds.add(id);
     return id;
   }
 }
