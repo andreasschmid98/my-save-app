@@ -14,7 +14,7 @@ class DeleteProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         height: 120,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -33,8 +33,9 @@ class DeleteProject extends StatelessWidget {
                             .read<ProjectProvider>()
                             .deleteProjectById(project.id)
                             .then((response) => Navigator.pop(context));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(AppLocalizations.of(context).projectDeleted)));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                AppLocalizations.of(context).projectDeleted)));
                       },
                       child: Text(AppLocalizations.of(context).yes)),
                   FilledButton(

@@ -35,8 +35,9 @@ class DeleteEntry extends StatelessWidget {
                             .deleteEntryById(entry.id)
                             .then((response) => Navigator.pop(context));
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(AppLocalizations.of(context).entryDeleted)));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                AppLocalizations.of(context).entryDeleted)));
                       },
                       child: Text(AppLocalizations.of(context).yes)),
                   FilledButton(

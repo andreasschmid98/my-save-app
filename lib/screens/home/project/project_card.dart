@@ -42,7 +42,7 @@ class ProjectCard extends StatelessWidget {
                   Expanded(
                     flex: 5,
                     child: Padding(
-                      padding: const EdgeInsets.only(right:5.0),
+                      padding: const EdgeInsets.only(right: 5.0),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -72,7 +72,8 @@ class ProjectCard extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: Text('${AppLocalizations.of(context).createdAt} ${DateFormat('dd. MMM. y').format(project.createdAt)}',
+                child: Text(
+                  '${AppLocalizations.of(context).createdAt} ${DateFormat('dd. MMM. y').format(project.createdAt)}',
                   style: TextStyle(
                     fontSize: 10.0,
                     color: Colors.grey[500],

@@ -67,8 +67,8 @@ class _CreateProjectState extends State<CreateProject> {
                               currency = selectedCurrency!;
                             });
                           },
-                          validator: (selectedCurrency) =>
-                          selectedCurrency != null
+                          validator: (selectedCurrency) => selectedCurrency !=
+                                  null
                               ? null
                               : AppLocalizations.of(context).currencyReminder,
                           items: Currency.values

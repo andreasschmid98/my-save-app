@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class PercentProgressCard extends StatefulWidget {
-
   const PercentProgressCard({
     super.key,
     required this.savingStatusInPercent,
@@ -16,7 +14,8 @@ class PercentProgressCard extends StatefulWidget {
   State<PercentProgressCard> createState() => _PercentProgressCardState();
 }
 
-class _PercentProgressCardState extends State<PercentProgressCard> with AutomaticKeepAliveClientMixin{
+class _PercentProgressCardState extends State<PercentProgressCard>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -35,8 +34,7 @@ class _PercentProgressCardState extends State<PercentProgressCard> with Automati
                   begin: 0,
                   end: widget.savingStatusInPercent,
                 ),
-                builder: (context, value, _) =>
-                CircularProgressIndicator(
+                builder: (context, value, _) => CircularProgressIndicator(
                   backgroundColor: Colors.white60,
                   value: value,
                 ),

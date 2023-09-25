@@ -22,8 +22,7 @@ class Dashboard extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          title:
-              Text(project!.title),
+          title: Text(project!.title),
           actions: [
             InkWell(
                 onTap: () {

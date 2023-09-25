@@ -159,9 +159,9 @@ class DatabaseService implements ProjectRepository, EntryRepository {
 
   int _createNextEntryId() {
     final random = Random();
-    int id = random.nextInt(10000).abs();
+    int id = random.nextInt(100000).abs();
     while (activeEntryIds.contains(id)) {
-      id = random.nextInt(10000).abs();
+      id = random.nextInt(100000).abs();
     }
     activeEntryIds.add(id);
     return id;
