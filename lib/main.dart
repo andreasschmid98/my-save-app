@@ -24,6 +24,7 @@ class WeSaveApp extends StatelessWidget {
     return ChangeNotifierProvider<ProjectProvider>(
       create: (_) => ProjectProvider(),
       child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
