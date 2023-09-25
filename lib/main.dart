@@ -32,8 +32,8 @@ class WeSaveApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: const [
-            Locale('de'),
             Locale('en'),
+            Locale('de'),
             Locale('es'),
             Locale('fr')
           ],
