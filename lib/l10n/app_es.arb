@@ -29,5 +29,11 @@
   "saveChanges": "Guardar Cambios",
   "currency": "Moneda",
   "currencyReminder": "¿En qué moneda te gustaría crear tu proyecto?",
-  "createdAt": "Creado el:"
+  "createdAt": "Creado el:",
+  "english": "Inglés",
+  "german": "Alemán",
+  "spanish": "Español",
+  "french": "Francés",
+  "chooseLanguage": "Elegir idioma",
+  "languageReminder": "¿En qué idioma te gustaría trabajar?"
 }
