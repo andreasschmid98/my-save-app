@@ -29,6 +29,12 @@
   "saveChanges": "Enregistrer les modifications",
   "currency": "Devise",
   "currencyReminder": "Dans quelle devise souhaitez-vous créer votre projet ?",
-  "createdAt": "Créé le :"
+  "createdAt": "Créé le :",
+  "english": "Anglais",
+  "german": "Allemand",
+  "spanish": "Espagnol",
+  "french": "Français",
+  "chooseLanguage": "Choisir la langue",
+  "languageReminder": "Dans quelle langue souhaites-tu travailler ?"
 }
 

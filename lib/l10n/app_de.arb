@@ -29,6 +29,12 @@
   "saveChanges": "Änderungen speichern",
   "currency": "Währung",
   "currencyReminder": "In welcher Währung möchtest Du Dein Projekt anlegen?",
-  "createdAt": "Erstellt am:"
+  "createdAt": "Erstellt am:",
+  "english": "Englisch",
+  "german": "Deutsch",
+  "spanish": "Spanisch",
+  "french": "Französich",
+  "chooseLanguage": "Sprache wählen",
+  "languageReminder": "Welche Sprache möchtest Du verwenden?"
 }
 
