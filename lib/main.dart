@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_save_app/providers/locale_provider.dart';
 import 'package:my_save_app/providers/project_provider.dart';
+import 'package:my_save_app/providers/theme_provider.dart';
 import 'package:my_save_app/screens/home/home.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,9 @@ Future<void> main() async {
     ),
     ChangeNotifierProvider<LocaleProvider>(
       create: (_) => LocaleProvider(),
+    ),
+    ChangeNotifierProvider<ThemeProvider>(
+      create: (_) => ThemeProvider(),
     ),
   ], child: const WeSaveApp()));
 }
@@ -45,11 +49,7 @@ class WeSaveApp extends StatelessWidget {
         Locale('es'),
         Locale('fr')
       ],
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.green,
-        brightness: Brightness.light,
-      ),
+      theme: context.watch<ThemeProvider>().theme,
       home: const Home(),
       routes: {
         '/home': (context) => const Home(),

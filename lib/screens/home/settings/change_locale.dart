@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:my_save_app/factories/LocaleFactory.dart';
+import 'package:my_save_app/factories/locale_factory.dart';
 import 'package:my_save_app/providers/locale_provider.dart';
 import 'package:provider/provider.dart';
 

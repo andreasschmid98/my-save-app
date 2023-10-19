@@ -6,10 +6,14 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: SpinKitThreeBounce(
-        color: Colors.black,
-        size: 50.0,
+    return const SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: SpinKitThreeBounce(
+            color: Colors.black,
+            size: 50.0,
+          ),
+        ),
       ),
     );
   }
