@@ -48,7 +48,7 @@ class _PercentProgressCardState extends State<PercentProgressCard>
               fit: BoxFit.fitWidth,
               child: Text(
                 '${(widget.savingStatusInPercent * 100).toStringAsFixed(0)}${AppLocalizations.of(context).percent}',
-                style: TextStyle(fontSize: 30, color: customTheme.percentProgressColor ), 
+                style: TextStyle(fontSize: 30, color: customTheme.percentProgressColor ),
               ),
             ),
           ],
