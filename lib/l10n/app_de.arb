@@ -35,6 +35,17 @@
   "spanish": "Spanisch",
   "french": "Französich",
   "chooseLanguage": "Sprache wählen",
-  "languageReminder": "Welche Sprache möchtest Du verwenden?"
+  "languageReminder": "Welche Sprache möchtest Du verwenden?",
+  "frequencyReminder": "In welchem Abstand soll der Betrag hinzugefügt werden?",
+  "startingDateReminder": "Wann soll der erste Eintrag hinzugefügt werden?",
+  "daily": "Täglich",
+  "weekly": "Wöchentlich",
+  "monthly": "Monatlich",
+  "yearly": "Jährlich",
+  "startingDate": "Startdatum",
+  "repeat": "Wiederholen",
+  "singleEntry": "Einzelner Eintrag",
+  "recurrentEntry": "Wiederkehrender Eintrag"
+
 }
 

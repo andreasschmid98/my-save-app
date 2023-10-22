@@ -35,6 +35,16 @@
   "spanish": "Espagnol",
   "french": "Français",
   "chooseLanguage": "Choisir la langue",
-  "languageReminder": "Dans quelle langue souhaites-tu travailler ?"
+  "languageReminder": "Dans quelle langue souhaites-tu travailler ?",
+  "frequencyReminder": "À quelle fréquence le montant doit-il être ajouté?",
+  "startingDateReminder": "Quand le premier enregistrement doit-il être ajouté?",
+  "daily": "Quotidiennement",
+  "weekly": "Hebdomadairement",
+  "monthly": "Mensuellement",
+  "yearly": "Annuellement",
+  "startingDate": "Choisir une date",
+  "repeat": "Répéter",
+  "singleEntry": "Entrée unique",
+  "recurrentEntry": "Entrée récurrente"
 }
 

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_save_app/models/frequency.dart';
 import 'package:provider/provider.dart';
+
 import '../../../providers/project_provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-class CreateEntry extends StatefulWidget {
-  const CreateEntry({super.key});
+class CreateSingleEntry extends StatefulWidget {
+  const CreateSingleEntry({super.key});
 
   @override
-  State<CreateEntry> createState() => _CreateEntryState();
+  State<CreateSingleEntry> createState() => _CreateSingleEntryState();
 }
 
-class _CreateEntryState extends State<CreateEntry> {
+class _CreateSingleEntryState extends State<CreateSingleEntry> {
   final _formKey = GlobalKey<FormState>();
 
   String description = '';
@@ -26,7 +27,7 @@ class _CreateEntryState extends State<CreateEntry> {
               child: Container(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(children: <Widget>[
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   TextFormField(
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
@@ -39,7 +40,7 @@ class _CreateEntryState extends State<CreateEntry> {
                       setState(() => description = descriptionInput);
                     },
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -55,7 +56,7 @@ class _CreateEntryState extends State<CreateEntry> {
                           double.parse(amountInput.replaceAll(',', '.')));
                     },
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   FilledButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
@@ -65,7 +66,8 @@ class _CreateEntryState extends State<CreateEntry> {
                               .id;
                           await context
                               .read<ProjectProvider>()
-                              .createEntry(description, projectId, saved)
+                              .createEntry(description, projectId, saved,
+                                  Frequency.SINGLE, DateTime.now())
                               .then((response) => Navigator.pop(context));
                         }
                       },

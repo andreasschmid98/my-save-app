@@ -7,17 +7,20 @@ class Entry {
   final String description;
   final double saved;
   final DateTime createdAt;
+  final DateTime startingDate;
   final Frequency frequency;
 
-  Entry({
-    required this.id,
-    required this.projectId,
-    required this.description,
-    required this.saved,
-    Frequency? frequency,
-    DateTime? createdAt,
-  })  : frequency = frequency ?? Frequency.SINGLE,
-        createdAt = createdAt ?? DateTime.now();
+  Entry(
+      {required this.id,
+      required this.projectId,
+      required this.description,
+      required this.saved,
+      Frequency? frequency,
+      DateTime? createdAt,
+      DateTime? startingDate})
+      : frequency = frequency ?? Frequency.SINGLE,
+        createdAt = createdAt ?? DateTime.now(),
+        startingDate = startingDate ?? DateTime.now();
 
   factory Entry.fromMap(Map<String, dynamic> map) {
     return Entry(
@@ -26,7 +29,8 @@ class Entry {
         description: map['description'] as String,
         saved: map['saved'] as double,
         frequency: FrequencyFactory.create(map['frequency']),
-        createdAt: DateTime.parse(map['createdAt'] as String));
+        createdAt: DateTime.parse(map['createdAt'] as String),
+        startingDate: DateTime.parse(map['startingDate'] as String));
   }
 
   Map<String, Object> toMap() {
@@ -36,6 +40,7 @@ class Entry {
       'saved': saved,
       'projectId': projectId,
       'frequency': frequency.index,
+      'startingDate': startingDate.toString(),
       'createdAt': createdAt.toString()
     };
   }

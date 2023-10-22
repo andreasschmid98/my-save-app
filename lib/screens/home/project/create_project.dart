@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_save_app/models/currency.dart';
 import 'package:my_save_app/providers/project_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class CreateProject extends StatefulWidget {
   const CreateProject({super.key});
@@ -40,7 +40,7 @@ class _CreateProjectState extends State<CreateProject> {
                       setState(() => title = titleInput);
                     },
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -56,7 +56,7 @@ class _CreateProjectState extends State<CreateProject> {
                           double.parse(savingsGoalInput.replaceAll(',', '.')));
                     },
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   Row(
                     children: [
                       Expanded(
@@ -88,7 +88,7 @@ class _CreateProjectState extends State<CreateProject> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   FilledButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {

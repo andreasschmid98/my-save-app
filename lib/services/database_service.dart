@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:my_save_app/models/entry.dart';
+import 'package:my_save_app/models/frequency.dart';
 import 'package:my_save_app/models/project.dart';
 import 'package:my_save_app/repositories/entry_repository.dart';
 import 'package:my_save_app/repositories/project_repository.dart';
@@ -36,9 +37,9 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   projectId INTEGER,
   )
   ''',
-    2: 'ALTER TABLE entries ADD frequency INTEGER DEFAULT 0'
+    2: 'ALTER TABLE entries ADD frequency INTEGER DEFAULT 0',
+    3: "ALTER TABLE entries ADD startingDate TEXT DEFAULT '1990-01-01 00:00:00.000'",
   };
-
 
   Future<Database> _getDatabase() async {
     int nbrMigrationScripts = migrationScripts.length;
@@ -109,12 +110,14 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   }
 
   @override
-  Future<Entry> createEntry(
-      String description, int projectId, double saved) async {
+  Future<Entry> createEntry(String description, int projectId, double saved,
+      Frequency frequency, DateTime startingDate) async {
     Entry entry = Entry(
         id: _createNextEntryId(),
         projectId: projectId,
         description: description,
+        frequency: frequency,
+        startingDate: startingDate,
         saved: saved);
     final Database db = await _getDatabase();
     final id = await db.insert(_ENTRIES_TABLE, entry.toMap(),
@@ -172,5 +175,4 @@ class DatabaseService implements ProjectRepository, EntryRepository {
     _activeEntryIds.add(id);
     return id;
   }
-
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_save_app/models/frequency.dart';
 import 'package:my_save_app/models/project.dart';
 import 'package:my_save_app/repositories/project_repository.dart';
 import 'package:my_save_app/services/database_service.dart';
@@ -42,8 +43,8 @@ class ProjectProvider with ChangeNotifier {
   }
 
   Future<void> createEntry(
-      String description, int projectId, double saved) async {
-    await _entryRepository.createEntry(description, projectId, saved);
+      String description, int projectId, double saved, Frequency frequency, DateTime startingDate) async {
+    await _entryRepository.createEntry(description, projectId, saved, frequency, startingDate);
     projects = await _getRefreshedProjects();
     notifyListeners();
   }
