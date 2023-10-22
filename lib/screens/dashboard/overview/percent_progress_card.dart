@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_save_app/theme/custom_theme_extension.dart';
 
 class PercentProgressCard extends StatefulWidget {
   const PercentProgressCard({
@@ -18,6 +19,9 @@ class _PercentProgressCardState extends State<PercentProgressCard>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+
+    final CustomThemeExtension customTheme = Theme.of(context).extension<CustomThemeExtension>()!;
+
     super.build(context);
     return Card(
       child: Center(
@@ -35,7 +39,7 @@ class _PercentProgressCardState extends State<PercentProgressCard>
                   end: widget.savingStatusInPercent,
                 ),
                 builder: (context, value, _) => CircularProgressIndicator(
-                  backgroundColor: Colors.white60,
+                  backgroundColor: customTheme.progressBarColor,
                   value: value,
                 ),
               ),
@@ -44,7 +48,7 @@ class _PercentProgressCardState extends State<PercentProgressCard>
               fit: BoxFit.fitWidth,
               child: Text(
                 '${(widget.savingStatusInPercent * 100).toStringAsFixed(0)}${AppLocalizations.of(context).percent}',
-                style: const TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: 30, color: customTheme.percentProgressColor ),
               ),
             ),
           ],

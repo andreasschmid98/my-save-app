@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:my_save_app/providers/project_provider.dart';
 import 'package:my_save_app/services/dashboard_service.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
 import '../../../models/project.dart';
+import '../../../theme/custom_theme_extension.dart';
 import 'delete_project.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -14,6 +16,9 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CustomThemeExtension? customTheme =
+        Theme.of(context).extension<CustomThemeExtension>();
+
     final entries = context.watch<ProjectProvider>().projects[project];
     final savingsStatusInPercent = DashboardService()
         .calculateSavingsStatusInPercent(entries!, project.savingsGoal);
@@ -56,16 +61,17 @@ class ProjectCard extends StatelessWidget {
                   Expanded(
                     flex: 6,
                     child: LinearProgressIndicator(
-                      value: savingsStatusInPercent,
-                      backgroundColor: Colors.grey,
-                    ),
+                        value: savingsStatusInPercent,
+                        backgroundColor: customTheme!.progressBarColor),
                   ),
                   Expanded(
                     flex: 2,
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                          '${(savingsStatusInPercent * 100).toStringAsFixed(0)}${AppLocalizations.of(context).percent}'),
+                          '${(savingsStatusInPercent * 100).toStringAsFixed(0)}${AppLocalizations.of(context).percent}',
+                          style: TextStyle(
+                              color: customTheme.percentProgressColor)),
                     ),
                   ),
                 ],
