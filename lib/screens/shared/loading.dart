@@ -8,6 +8,7 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: Scaffold(
+        backgroundColor: Color.fromRGBO(252, 254, 248, 1),
         body: Center(
           child: SpinKitThreeBounce(
             color: Colors.black,

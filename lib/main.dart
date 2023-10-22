@@ -34,6 +34,13 @@ class WeSaveApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<ThemeProvider>().initialize();
+    context.watch<ProjectProvider>().initialize();
+    context.watch<LocaleProvider>().initialize();
+
+    final theme = context.watch<ThemeProvider>().theme;
+    final locale = context.watch<LocaleProvider>().locale;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
@@ -42,14 +49,14 @@ class WeSaveApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: context.watch<LocaleProvider>().locale,
+      locale: locale,
       supportedLocales: const [
         Locale('en'),
         Locale('de'),
         Locale('es'),
         Locale('fr')
       ],
-      theme: context.watch<ThemeProvider>().theme,
+      theme: theme,
       home: const Home(),
       routes: {
         '/home': (context) => const Home(),

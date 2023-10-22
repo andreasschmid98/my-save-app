@@ -15,10 +15,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<ThemeProvider>().initialize();
-    context.watch<ProjectProvider>().initialize();
-    context.watch<LocaleProvider>().initialize();
-
     final providerInitialized = context.watch<ProjectProvider>().initialized;
     final localeInitialized = context.watch<LocaleProvider>().initialized;
     final themeInitialized = context.watch<ThemeProvider>().initialized;
