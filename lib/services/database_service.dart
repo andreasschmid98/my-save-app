@@ -28,18 +28,16 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   savingsGoal REAL,
   createdAt TEXT,
   currency TEXT
-  )
-  ''',
-    2: '''
-    CREATE TABLE entries(
-      id INTEGER PRIMARY KEY NOT NULL,
-      description TEXT,
-      saved REAL,
-      createdAt TEXT,
-      projectId INTEGER
+  );
+   CREATE TABLE entries(
+     id INTEGER PRIMARY KEY NOT NULL,
+     description TEXT,
+     saved REAL,
+     createdAt TEXT,
+     projectId INTEGER
     )''',
-    3: 'ALTER TABLE entries ADD frequency INTEGER DEFAULT 0',
-    4: "ALTER TABLE entries ADD startingDate TEXT DEFAULT '1990-01-01 00:00:00.000'",
+    2: 'ALTER TABLE entries ADD frequency INTEGER DEFAULT 0',
+    3: "ALTER TABLE entries ADD startingDate TEXT DEFAULT '1990-01-01 00:00:00.000'",
   };
 
   Future<Database> _getDatabase() async {
