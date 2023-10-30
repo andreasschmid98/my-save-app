@@ -1,0 +1,1 @@
+enum Filter { All, Recurrent, Single }

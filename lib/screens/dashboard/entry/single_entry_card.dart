@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:my_save_app/screens/dashboard/entry/delete_entry.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/entry.dart';
 import '../../../providers/project_provider.dart';
 
-class EntryCard extends StatelessWidget {
+class SingleEntryCard extends StatelessWidget {
   final Entry entry;
 
-  const EntryCard({required this.entry, Key? key}) : super(key: key);
+  const SingleEntryCard({required this.entry, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class EntryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-                flex: 2,
+                flex: 4,
                 child: ListTile(
                   title: Text(
                     entry.description,
@@ -40,7 +41,7 @@ class EntryCard extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 1,
+                flex: 3,
                 child: Column(
                   children: [
                     Align(
@@ -49,6 +50,9 @@ class EntryCard extends StatelessWidget {
                         '${entry.saved.toStringAsFixed(2)} ${project!.currency}',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
+                        style: const TextStyle(
+                          fontSize: 12.0,
+                        ),
                       ),
                     ),
                     Align(
@@ -56,14 +60,14 @@ class EntryCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 3.0),
                         child: Text(
-                          DateFormat('dd. MMM. y').format(entry.createdAt),
+                          '${AppLocalizations.of(context).createdAt} ${DateFormat('dd. MMM. y').format(entry.createdAt)}',
                           style: TextStyle(
                             fontSize: 10.0,
                             color: Colors.grey[500],
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

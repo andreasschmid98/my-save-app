@@ -45,5 +45,9 @@
   "startingDate": "Starting Date",
   "repeat": "Repeat",
   "singleEntry": "Single Entry",
-  "recurrentEntry": "Recurrent Entry"
+  "recurrentEntry": "Recurrent Entry",
+  "day": "day",
+  "week": "week",
+  "month": "month",
+  "year": "year"
 }

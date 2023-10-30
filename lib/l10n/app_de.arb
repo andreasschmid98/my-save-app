@@ -45,7 +45,10 @@
   "startingDate": "Startdatum",
   "repeat": "Wiederholen",
   "singleEntry": "Einzelner Eintrag",
-  "recurrentEntry": "Wiederkehrender Eintrag"
-
+  "recurrentEntry": "Wiederkehrender Eintrag",
+  "day": "Tag",
+  "week": "Woche",
+  "month": "Monat",
+  "year": "Jahr"
 }
 

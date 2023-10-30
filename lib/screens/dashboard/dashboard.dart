@@ -26,17 +26,20 @@ class Dashboard extends StatelessWidget {
             centerTitle: true,
             title: Text(project!.title),
             actions: [
-              InkWell(
-                  onTap: () {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return EditProject(project: project);
-                        });
-                  },
-                  child: const Icon(
-                    Icons.edit,
-                  ))
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: InkWell(
+                    onTap: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return EditProject(project: project);
+                          });
+                    },
+                    child: const Icon(
+                      Icons.edit,
+                    )),
+              )
             ],
             bottom: TabBar(
               tabs: <Widget>[

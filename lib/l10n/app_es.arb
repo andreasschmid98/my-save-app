@@ -42,8 +42,12 @@
   "weekly": "Semanalmente",
   "monthly": "Mensualmente",
   "yearly": "Anualmente",
-  "startingDate": "Seleccionar fecha",
+  "startingDate": "Fecha de inicio",
   "repeat": "Repetir",
   "singleEntry": "Entrada única",
-  "recurrentEntry": "Entrada recurrente"
+  "recurrentEntry": "Entrada recurrente",
+  "day": "día",
+  "week": "semana",
+  "month": "mes",
+  "year": "año"
 }

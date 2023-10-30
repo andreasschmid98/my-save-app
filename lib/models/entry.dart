@@ -28,7 +28,7 @@ class Entry {
         projectId: map['projectId'] as int,
         description: map['description'] as String,
         saved: map['saved'] as double,
-        frequency: FrequencyFactory.create(map['frequency']),
+        frequency: FrequencyFactory.createFrequency(map['frequency']),
         createdAt: DateTime.parse(map['createdAt'] as String),
         startingDate: DateTime.parse(map['startingDate'] as String));
   }
