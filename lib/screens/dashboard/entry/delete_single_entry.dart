@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/project.dart';
+import '../../../models/entry.dart';
 import '../../../providers/project_provider.dart';
 
-class DeleteProject extends StatelessWidget {
-  const DeleteProject({
+class DeleteSingleEntry extends StatelessWidget {
+  const DeleteSingleEntry({
     super.key,
-    required this.project,
+    required this.entry,
   });
 
-  final Project project;
+  final Entry entry;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class DeleteProject extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            Text(AppLocalizations.of(context).deleteProject),
+            Text(AppLocalizations.of(context).deleteEntry),
             const SizedBox(
               height: 15,
             ),
@@ -31,11 +31,12 @@ class DeleteProject extends StatelessWidget {
                     onPressed: () async {
                       await context
                           .read<ProjectProvider>()
-                          .deleteProjectById(project.id)
+                          .deleteEntryById(entry.id)
                           .then((response) => Navigator.pop(context));
+
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(
-                              AppLocalizations.of(context).projectDeleted)));
+                          content:
+                              Text(AppLocalizations.of(context).entryDeleted)));
                     },
                     child: Text(AppLocalizations.of(context).yes)),
                 FilledButton(

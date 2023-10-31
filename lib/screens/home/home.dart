@@ -42,8 +42,13 @@ class Home extends StatelessWidget {
                 onOpen: () {
                   showModalBottomSheet(
                       context: context,
+                      isScrollControlled: true,
                       builder: (BuildContext context) {
-                        return const CreateProject();
+                        return Padding(
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).viewInsets.bottom),
+                          child: const CreateProject(),
+                        );
                       });
                 }))
         : const Loading();

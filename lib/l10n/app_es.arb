@@ -4,6 +4,7 @@
   "allProjects": "Proyectos",
   "newProject": "Nuevo Proyecto",
   "createProject": "Crear Proyecto",
+  "editProject": "Editar Proyecto",
   "projectDeleted": "Proyecto Eliminado",
   "title": "Título",
   "titleReminder": "¿Qué título debería tener tu proyecto?",
@@ -49,5 +50,11 @@
   "day": "día",
   "week": "semana",
   "month": "mes",
-  "year": "año"
+  "year": "año",
+  "recurrentEntryActionQuestion": "¿Qué acción te gustaría realizar?",
+  "stopRecurrentEntry": "Detener Ahorro Recurrente",
+  "stopRecurrentEntryInformation": "Las cantidades previamente guardadas se guardarán como una sola entrada",
+  "deleteRecurrentEntry": "Borrar Entrada",
+  "deleteRecurrentEntryInformation": "Las cantidades previamente guardadas se eliminarán",
+  "executeRecurrentEntryAction": "Ejecutar"
 }

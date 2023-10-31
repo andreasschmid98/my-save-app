@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_save_app/models/entry.dart';
 
-import '../../../models/filter.dart';
+import 'enums/filter.dart';
 import 'recurrent_entry_card.dart';
 
 class RecurrentEntryList extends StatelessWidget {
@@ -19,9 +18,7 @@ class RecurrentEntryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (filter == Filter.Single) {
-      return Container();
-    } else if (filter == Filter.All ||
+    if (filter == Filter.All ||
         (filter == Filter.Recurrent && recurrentEntries.isNotEmpty)) {
       return ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
@@ -33,8 +30,7 @@ class RecurrentEntryList extends StatelessWidget {
             return RecurrentEntryCard(entry: entry);
           });
     } else {
-      return Center(
-          child: Text(AppLocalizations.of(context).noEntriesAvailable));
+      return Container();
     }
   }
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:my_save_app/factories/frequency_factory.dart';
-import 'package:my_save_app/screens/dashboard/entry/delete_entry.dart';
+import 'package:my_save_app/screens/dashboard/entry/action_recurrent_entry.dart';
+import 'package:my_save_app/screens/dashboard/entry/delete_single_entry.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/entry.dart';
@@ -23,7 +24,7 @@ class RecurrentEntryCard extends StatelessWidget {
           showModalBottomSheet(
               context: context,
               builder: (BuildContext context) {
-                return DeleteEntry(entry: entry);
+                return ActionRecurrentEntry(entry: entry);
               });
         },
         child: Card(

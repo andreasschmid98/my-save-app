@@ -31,9 +31,15 @@ class Dashboard extends StatelessWidget {
                 child: InkWell(
                     onTap: () {
                       showModalBottomSheet(
+                          isScrollControlled: true,
                           context: context,
                           builder: (BuildContext context) {
-                            return EditProject(project: project);
+                            return Padding(
+                                padding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context)
+                                        .viewInsets
+                                        .bottom),
+                                child: EditProject(project: project));
                           });
                     },
                     child: const Icon(
@@ -79,8 +85,14 @@ class Dashboard extends StatelessWidget {
                   onTap: () {
                     showModalBottomSheet(
                         context: context,
+                        isScrollControlled: true,
                         builder: (BuildContext context) {
-                          return const CreateSingleEntry();
+                          return Padding(
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom),
+                            child: const CreateSingleEntry(),
+                          );
                         });
                   }
                   //label: 'First',
@@ -93,8 +105,13 @@ class Dashboard extends StatelessWidget {
                   onTap: () {
                     showModalBottomSheet(
                         context: context,
+                        isScrollControlled: true,
                         builder: (BuildContext context) {
-                          return const CreateRecurrentEntry();
+                          return Padding(
+                              padding: EdgeInsets.only(
+                                  bottom:
+                                      MediaQuery.of(context).viewInsets.bottom),
+                              child: CreateRecurrentEntry());
                         });
                   }
                   //label: 'First',

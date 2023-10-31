@@ -4,6 +4,7 @@
   "allProjects": "Tous les projets",
   "newProject": "Nouveau projet",
   "createProject": "Créer un projet",
+  "editProject": "Modifier le Projet",
   "projectDeleted": "Projet supprimé",
   "title": "Titre",
   "titleReminder": "Quel titre devrait avoir votre projet ?",
@@ -42,13 +43,19 @@
   "weekly": "Hebdomadairement",
   "monthly": "Mensuellement",
   "yearly": "Annuellement",
-  "startingDate" : "Date de début",
+  "startingDate": "Date de début",
   "repeat": "Répéter",
   "singleEntry": "Entrée unique",
   "recurrentEntry": "Entrée récurrente",
-  "day" : "jour",
-  "week" : "semaine",
-  "month" : "mois",
-  "year" : "année"
+  "day": "jour",
+  "week": "semaine",
+  "month": "mois",
+  "year": "année",
+  "recurrentEntryActionQuestion": "Quelle action souhaitez-vous effectuer?",
+  "stopRecurrentEntry": "Arrêter les Économies Récurrentes",
+  "stopRecurrentEntryInformation": "Les montants précédemment économisés seront enregistrés en tant qu'entrée unique",
+  "deleteRecurrentEntry": "Supprimer l'Entrée",
+  "deleteRecurrentEntryInformation": "Les montants précédemment économisés seront supprimés",
+  "executeRecurrentEntryAction": "Exécuter"
 }
 

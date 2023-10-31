@@ -4,6 +4,7 @@
   "allProjects": "All Projects",
   "newProject": "New Project",
   "createProject": "Create Project",
+  "editProject": "Edit Project",
   "projectDeleted": "Project Deleted",
   "title": "Title",
   "titleReminder": "What title should your project have?",
@@ -49,5 +50,11 @@
   "day": "day",
   "week": "week",
   "month": "month",
-  "year": "year"
+  "year": "year",
+  "recurrentEntryActionQuestion": "What action would you like to perform?",
+  "stopRecurrentEntry": "Stop Recurrent Savings",
+  "stopRecurrentEntryInformation": "Previously saved amounts will be stored as a single entry",
+  "deleteRecurrentEntry": "Delete Entry",
+  "deleteRecurrentEntryInformation": "Previously saved amounts will be deleted",
+  "executeRecurrentEntryAction": "Execute"
 }

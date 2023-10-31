@@ -4,6 +4,7 @@
   "allProjects": "Alle Projekte",
   "newProject": "Neues Projekt",
   "createProject": "Projekt erstellen",
+  "editProject": "Projekt bearbeiten",
   "projectDeleted": "Projekt gelöscht",
   "title": "Titel",
   "titleReminder": "Welchen Titel soll Dein Projekt haben?",
@@ -49,6 +50,12 @@
   "day": "Tag",
   "week": "Woche",
   "month": "Monat",
-  "year": "Jahr"
+  "year": "Jahr",
+  "recurrentEntryActionQuestion": "Welche Aktion möchtest Du ausführen?",
+  "stopRecurrentEntry": "Sparen beenden",
+  "stopRecurrentEntryInformation": "Bisher Gespartes wird als Einzel-Eintrag gespeichert",
+  "deleteRecurrentEntry": "Eintrag löschen",
+  "deleteRecurrentEntryInformation": "Bisher Gespartes wird gelöscht",
+  "executeRecurrentEntryAction": "Durchführen"
 }
 

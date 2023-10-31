@@ -24,14 +24,18 @@ class _CreateRecurrentEntryState extends State<CreateRecurrentEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Center(
+    return Wrap(children: [
+      Center(
           child: Form(
               key: _formKey,
               child: Container(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(children: <Widget>[
-                  const SizedBox(height: 15.0),
+                child:
+                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                      Text(AppLocalizations.of(context).createEntry),
+                      const SizedBox(
+                        height: 15,
+                      ),
                   TextFormField(
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
@@ -143,8 +147,8 @@ class _CreateRecurrentEntryState extends State<CreateRecurrentEntry> {
                       },
                       child: Text(AppLocalizations.of(context).createEntry))
                 ]),
-              ))),
-    );
+              )))
+    ]);
   }
 
   bool _amountInputIsValid(String amountInput) {

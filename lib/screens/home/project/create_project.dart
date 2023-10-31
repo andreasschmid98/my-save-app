@@ -20,14 +20,18 @@ class _CreateProjectState extends State<CreateProject> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Center(
+    return Wrap(children: [
+      Center(
           child: Form(
               key: _formKey,
               child: Container(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(children: <Widget>[
-                  const SizedBox(height: 20.0),
+                child:
+                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                      Text(AppLocalizations.of(context).createProject),
+                      const SizedBox(
+                        height: 15,
+                      ),
                   TextFormField(
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
@@ -102,7 +106,7 @@ class _CreateProjectState extends State<CreateProject> {
                       child: Text(AppLocalizations.of(context).createProject))
                 ]),
               ))),
-    );
+    ]);
   }
 
   bool _savingsGoalInputIsValid(String savingsGoalInput) {
