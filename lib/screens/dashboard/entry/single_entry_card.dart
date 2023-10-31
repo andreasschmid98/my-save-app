@@ -40,7 +40,7 @@ class SingleEntryCard extends StatelessWidget {
                     entry.description,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                  ),
+                  )
                 ),
               ),
               Expanded(

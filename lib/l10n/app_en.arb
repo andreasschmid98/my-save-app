@@ -56,5 +56,8 @@
   "stopRecurrentEntryInformation": "Previously saved amounts will be stored as a single entry",
   "deleteRecurrentEntry": "Delete Entry",
   "deleteRecurrentEntryInformation": "Previously saved amounts will be deleted",
-  "executeRecurrentEntryAction": "Execute"
+  "executeRecurrentEntryAction": "Execute",
+  "all": "All",
+  "recurrent": "Recurrent",
+  "single": "Single"
 }

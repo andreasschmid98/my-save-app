@@ -56,6 +56,9 @@
   "stopRecurrentEntryInformation": "Bisher Gespartes wird als Einzel-Eintrag gespeichert",
   "deleteRecurrentEntry": "Eintrag löschen",
   "deleteRecurrentEntryInformation": "Bisher Gespartes wird gelöscht",
-  "executeRecurrentEntryAction": "Durchführen"
+  "executeRecurrentEntryAction": "Durchführen",
+  "all": "Alle",
+  "recurrent": "Wiederkehrend",
+  "single": "Einzeln"
 }
 

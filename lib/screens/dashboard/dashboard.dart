@@ -111,7 +111,7 @@ class Dashboard extends StatelessWidget {
                               padding: EdgeInsets.only(
                                   bottom:
                                       MediaQuery.of(context).viewInsets.bottom),
-                              child: CreateRecurrentEntry());
+                              child: const CreateRecurrentEntry());
                         });
                   }
                   //label: 'First',

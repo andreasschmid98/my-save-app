@@ -56,6 +56,9 @@
   "stopRecurrentEntryInformation": "Les montants précédemment économisés seront enregistrés en tant qu'entrée unique",
   "deleteRecurrentEntry": "Supprimer l'Entrée",
   "deleteRecurrentEntryInformation": "Les montants précédemment économisés seront supprimés",
-  "executeRecurrentEntryAction": "Exécuter"
+  "executeRecurrentEntryAction": "Exécuter",
+  "all": "Tout",
+  "recurrent": "Récurrent",
+  "single": "Unique"
 }
 

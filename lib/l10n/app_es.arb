@@ -56,5 +56,8 @@
   "stopRecurrentEntryInformation": "Las cantidades previamente guardadas se guardarán como una sola entrada",
   "deleteRecurrentEntry": "Borrar Entrada",
   "deleteRecurrentEntryInformation": "Las cantidades previamente guardadas se eliminarán",
-  "executeRecurrentEntryAction": "Ejecutar"
+  "executeRecurrentEntryAction": "Ejecutar",
+  "all": "Todo",
+  "recurrent": "Recurrente",
+  "single": "Individual"
 }
