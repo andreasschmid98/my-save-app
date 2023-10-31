@@ -5,6 +5,7 @@ import 'package:my_save_app/screens/dashboard/entry/delete_single_entry.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/entry.dart';
+import '../../../providers/locale_provider.dart';
 import '../../../providers/project_provider.dart';
 
 class SingleEntryCard extends StatelessWidget {
@@ -15,6 +16,7 @@ class SingleEntryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final project = context.watch<ProjectProvider>().currentProject;
+    final locale = context.watch<LocaleProvider>().locale;
 
     return InkWell(
         onLongPress: () {
@@ -61,7 +63,7 @@ class SingleEntryCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 3.0),
                         child: Text(
-                          '${AppLocalizations.of(context).createdAt} ${DateFormat('dd. MMM. y').format(entry.createdAt)}',
+                          '${AppLocalizations.of(context).createdAt} ${DateFormat('dd. MMM. y', locale!.languageCode).format(entry.createdAt)}',
                           style: TextStyle(
                             fontSize: 10.0,
                             color: Colors.grey[500],

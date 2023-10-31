@@ -3,10 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:my_save_app/factories/frequency_factory.dart';
 import 'package:my_save_app/screens/dashboard/entry/action_recurrent_entry.dart';
-import 'package:my_save_app/screens/dashboard/entry/delete_single_entry.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/entry.dart';
+import '../../../providers/locale_provider.dart';
 import '../../../providers/project_provider.dart';
 import '../../../services/dashboard_service.dart';
 
@@ -18,6 +18,7 @@ class RecurrentEntryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final project = context.watch<ProjectProvider>().currentProject;
+    final locale = context.watch<LocaleProvider>().locale;
 
     return InkWell(
         onLongPress: () {
@@ -58,7 +59,7 @@ class RecurrentEntryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '${AppLocalizations.of(context).startingDate}: ${DateFormat('dd. MMM. y').format(entry.startingDate)}',
+                      '${AppLocalizations.of(context).startingDate}: ${DateFormat('dd. MMM. y', locale!.languageCode).format(entry.startingDate)}',
                       style: TextStyle(
                         fontSize: 10.0,
                         color: Colors.grey[500],
@@ -66,7 +67,7 @@ class RecurrentEntryCard extends StatelessWidget {
                     ),
                     const Spacer(),
                     Text(
-                      '${entry.saved.toStringAsFixed(2)} ${project!.currency} / ${FrequencyFactory.createFrequencyString(entry.frequency, context)}',
+                      '${entry.saved.toStringAsFixed(2)} ${project.currency} / ${FrequencyFactory.createFrequencyString(entry.frequency, context)}',
                       style: TextStyle(
                         fontSize: 10.0,
                         color: Colors.grey[500],
