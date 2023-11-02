@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:my_save_app/models/frequency.dart';
 import 'package:provider/provider.dart';
 
+import '../../../providers/locale_provider.dart';
 import '../../../providers/project_provider.dart';
 
 class CreateRecurrentEntry extends StatefulWidget {
@@ -24,6 +25,7 @@ class _CreateRecurrentEntryState extends State<CreateRecurrentEntry> {
 
   @override
   Widget build(BuildContext context) {
+    final locale = context.watch<LocaleProvider>().locale;
     return Wrap(children: [
       Center(
           child: Form(
@@ -32,10 +34,10 @@ class _CreateRecurrentEntryState extends State<CreateRecurrentEntry> {
                 padding: const EdgeInsets.all(20.0),
                 child:
                     Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                      Text(AppLocalizations.of(context).createEntry),
-                      const SizedBox(
-                        height: 15,
-                      ),
+                  Text(AppLocalizations.of(context).createEntry),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   TextFormField(
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
@@ -109,7 +111,8 @@ class _CreateRecurrentEntryState extends State<CreateRecurrentEntry> {
                   TextFormField(
                     decoration: InputDecoration(
                         labelText: startingDate != null
-                            ? DateFormat('dd. MMM. y').format(startingDate!)
+                            ? DateFormat.yMd(locale!.languageCode)
+                                .format(startingDate!)
                             : AppLocalizations.of(context).startingDate,
                         contentPadding: const EdgeInsets.all(10.0),
                         hintText: AppLocalizations.of(context).startingDate,

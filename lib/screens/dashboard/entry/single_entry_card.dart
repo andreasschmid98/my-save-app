@@ -63,7 +63,7 @@ class SingleEntryCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 3.0),
                         child: Text(
-                          '${AppLocalizations.of(context).createdAt} ${DateFormat('dd. MMM. y', locale!.languageCode).format(entry.createdAt)}',
+                          '${AppLocalizations.of(context).createdAt} ${DateFormat.yMd( locale!.languageCode).format(entry.createdAt)}',
                           style: TextStyle(
                             fontSize: 10.0,
                             color: Colors.grey[500],

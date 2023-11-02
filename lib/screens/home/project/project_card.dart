@@ -81,7 +81,7 @@ class ProjectCard extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  '${AppLocalizations.of(context).createdAt} ${DateFormat('dd. MMM. y', locale!.languageCode).format(project.createdAt)}',
+                  '${AppLocalizations.of(context).createdAt} ${DateFormat.yMd( locale!.languageCode).format(project.createdAt)}',
                   style: TextStyle(
                     fontSize: 10.0,
                     color: Colors.grey[500],

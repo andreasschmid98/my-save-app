@@ -59,7 +59,7 @@ class RecurrentEntryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '${AppLocalizations.of(context).startingDate}: ${DateFormat('dd. MMM. y', locale!.languageCode).format(entry.startingDate)}',
+                      '${AppLocalizations.of(context).startingDate}: ${DateFormat.yMd(locale!.languageCode).format(entry.startingDate)}',
                       style: TextStyle(
                         fontSize: 10.0,
                         color: Colors.grey[500],
