@@ -1,10 +1,11 @@
 import 'dart:math';
 
-import 'package:path/path.dart';
 import 'package:my_save_app/models/entry.dart';
+import 'package:my_save_app/models/frequency.dart';
 import 'package:my_save_app/models/project.dart';
 import 'package:my_save_app/repositories/entry_repository.dart';
 import 'package:my_save_app/repositories/project_repository.dart';
+import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService implements ProjectRepository, EntryRepository {
@@ -19,36 +20,45 @@ class DatabaseService implements ProjectRepository, EntryRepository {
 
   static final DatabaseService instance = DatabaseService._();
 
-  Future<Database> _getDatabase() async {
-    databaseFactory.deleteDatabase(await getDatabasesPath());
-    return openDatabase(
-      join(await getDatabasesPath(), 'savings_tracker.db'),
-      onCreate: (db, version) {
-        return _createTables(db);
-      },
-      version: 1,
-    );
-  }
-
-  void _createTables(Database db) {
-    db.execute('''
-  CREATE TABLE projects(
+  Map<int, String> migrationScripts = {
+    1: '''
+  CREATE TABLE IF NOT EXISTS projects(
   id INTEGER PRIMARY KEY NOT NULL,
   title TEXT,
   savingsGoal REAL,
   createdAt TEXT,
   currency TEXT
   )
-  ''');
-    db.execute('''
-  CREATE TABLE entries(
-  id INTEGER PRIMARY KEY NOT NULL,
-  description TEXT,
-  saved REAL,
-  createdAt TEXT,
-  projectId INTEGER
-  )
-  ''');
+  ''',
+    2: '''
+    CREATE TABLE IF NOT EXISTS entries(
+      id INTEGER PRIMARY KEY NOT NULL,
+      description TEXT,
+      saved REAL,
+      createdAt TEXT,
+      projectId INTEGER
+    )''',
+    3: 'ALTER TABLE entries ADD frequency INTEGER DEFAULT 0',
+    4: "ALTER TABLE entries ADD startingDate TEXT DEFAULT '1990-01-01 00:00:00.000'",
+  };
+
+  Future<Database> _getDatabase() async {
+    int nbrMigrationScripts = migrationScripts.length;
+    var db = await openDatabase(
+      join(await getDatabasesPath(), 'savings_tracker.db'),
+      version: nbrMigrationScripts,
+      onCreate: (Database db, int version) async {
+        for (int i = 1; i <= nbrMigrationScripts; i++) {
+          await db.execute(migrationScripts[i]!);
+        }
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        for (int i = oldVersion + 1; i <= newVersion; i++) {
+          await db.execute(migrationScripts[i]!);
+        }
+      },
+    );
+    return db;
   }
 
   @override
@@ -101,12 +111,14 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   }
 
   @override
-  Future<Entry> createEntry(
-      String description, int projectId, double saved) async {
+  Future<Entry> createEntry(String description, int projectId, double saved,
+      Frequency frequency, DateTime startingDate) async {
     Entry entry = Entry(
         id: _createNextEntryId(),
         projectId: projectId,
         description: description,
+        frequency: frequency,
+        startingDate: startingDate,
         saved: saved);
     final Database db = await _getDatabase();
     final id = await db.insert(_ENTRIES_TABLE, entry.toMap(),

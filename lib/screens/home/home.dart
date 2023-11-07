@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:my_save_app/providers/locale_provider.dart';
 import 'package:my_save_app/providers/project_provider.dart';
 import 'package:my_save_app/providers/theme_provider.dart';
@@ -35,18 +36,21 @@ class Home extends StatelessWidget {
                 actions: const [ChangeTheme(), ChangeLocale()]),
             body: Container(
                 margin: const EdgeInsets.all(30.0), child: const ProjectList()),
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const CreateProject();
-                    });
-              },
-              label: Text(AppLocalizations.of(context).createProject),
-              icon: const Icon(Icons.add),
-            ),
-          )
+            floatingActionButton: SpeedDial(
+                icon: Icons.add,
+                spacing: 3,
+                onOpen: () {
+                  showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (BuildContext context) {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).viewInsets.bottom),
+                          child: const CreateProject(),
+                        );
+                      });
+                }))
         : const Loading();
   }
 }

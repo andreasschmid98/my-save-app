@@ -6,6 +6,7 @@ import 'package:my_save_app/services/dashboard_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/project.dart';
+import '../../../providers/locale_provider.dart';
 import '../../../theme/custom_theme_extension.dart';
 import 'delete_project.dart';
 
@@ -16,6 +17,7 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = context.watch<LocaleProvider>().locale;
     final CustomThemeExtension? customTheme =
         Theme.of(context).extension<CustomThemeExtension>();
 
@@ -79,7 +81,7 @@ class ProjectCard extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: Text(
-                  '${AppLocalizations.of(context).createdAt} ${DateFormat('dd. MMM. y').format(project.createdAt)}',
+                  '${AppLocalizations.of(context).createdAt} ${DateFormat.yMd( locale!.languageCode).format(project.createdAt)}',
                   style: TextStyle(
                     fontSize: 10.0,
                     color: Colors.grey[500],

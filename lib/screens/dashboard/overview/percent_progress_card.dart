@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_save_app/theme/custom_theme_extension.dart';
 
@@ -19,8 +18,8 @@ class _PercentProgressCardState extends State<PercentProgressCard>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
-
-    final CustomThemeExtension customTheme = Theme.of(context).extension<CustomThemeExtension>()!;
+    final CustomThemeExtension customTheme =
+        Theme.of(context).extension<CustomThemeExtension>()!;
 
     super.build(context);
     return Card(
@@ -47,8 +46,9 @@ class _PercentProgressCardState extends State<PercentProgressCard>
             FittedBox(
               fit: BoxFit.fitWidth,
               child: Text(
-                '${(widget.savingStatusInPercent * 100).toStringAsFixed(0)}${AppLocalizations.of(context).percent}',
-                style: TextStyle(fontSize: 30, color: customTheme.percentProgressColor ),
+                '${_getSavingStatusInPercentAsString()}${AppLocalizations.of(context).percent}',
+                style: TextStyle(
+                    fontSize: 30, color: customTheme.percentProgressColor),
               ),
             ),
           ],
@@ -59,4 +59,12 @@ class _PercentProgressCardState extends State<PercentProgressCard>
 
   @override
   bool get wantKeepAlive => true;
+
+  String _getSavingStatusInPercentAsString() {
+    final savingStatus = widget.savingStatusInPercent * 100;
+    if (savingStatus < 1 && savingStatus > 0) {
+      return '< 1';
+    }
+    return savingStatus.toStringAsFixed(0);
+  }
 }

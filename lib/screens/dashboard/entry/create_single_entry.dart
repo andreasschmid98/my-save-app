@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_save_app/models/frequency.dart';
 import 'package:provider/provider.dart';
+
 import '../../../providers/project_provider.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-class CreateEntry extends StatefulWidget {
-  const CreateEntry({super.key});
+class CreateSingleEntry extends StatefulWidget {
+  const CreateSingleEntry({super.key});
 
   @override
-  State<CreateEntry> createState() => _CreateEntryState();
+  State<CreateSingleEntry> createState() => _CreateSingleEntryState();
 }
 
-class _CreateEntryState extends State<CreateEntry> {
+class _CreateSingleEntryState extends State<CreateSingleEntry> {
   final _formKey = GlobalKey<FormState>();
 
   String description = '';
@@ -19,14 +20,18 @@ class _CreateEntryState extends State<CreateEntry> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Center(
+    return Wrap(children: [
+      Center(
           child: Form(
               key: _formKey,
               child: Container(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(children: <Widget>[
-                  const SizedBox(height: 20.0),
+                child:
+                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                  Text(AppLocalizations.of(context).createEntry),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   TextFormField(
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
@@ -39,7 +44,7 @@ class _CreateEntryState extends State<CreateEntry> {
                       setState(() => description = descriptionInput);
                     },
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -55,7 +60,7 @@ class _CreateEntryState extends State<CreateEntry> {
                           double.parse(amountInput.replaceAll(',', '.')));
                     },
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   FilledButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
@@ -65,18 +70,31 @@ class _CreateEntryState extends State<CreateEntry> {
                               .id;
                           await context
                               .read<ProjectProvider>()
-                              .createEntry(description, projectId, saved)
-                              .then((response) => Navigator.pop(context));
+                              .createEntry(description, projectId, saved,
+                                  Frequency.SINGLE, DateTime.now())
+                              .then((response) => _onSuccess(context))
+                              .onError(
+                                  (error, stackTrace) => _onError(context));
                         }
                       },
                       child: Text(AppLocalizations.of(context).createEntry))
                 ]),
-              ))),
-    );
+              )))
+    ]);
   }
 
   bool _amountInputIsValid(String amountInput) {
     return amountInput.isNotEmpty &&
         double.tryParse(amountInput.replaceAll(',', '.')) != null;
+  }
+
+  void _onError(BuildContext context) {
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).error)));
+  }
+
+  void _onSuccess(BuildContext context) {
+    Navigator.pop(context);
   }
 }

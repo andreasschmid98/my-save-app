@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_save_app/models/currency.dart';
 import 'package:my_save_app/providers/project_provider.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class CreateProject extends StatefulWidget {
   const CreateProject({super.key});
@@ -20,14 +20,18 @@ class _CreateProjectState extends State<CreateProject> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Center(
+    return Wrap(children: [
+      Center(
           child: Form(
               key: _formKey,
               child: Container(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(children: <Widget>[
-                  const SizedBox(height: 20.0),
+                child:
+                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                  Text(AppLocalizations.of(context).createProject),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   TextFormField(
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
@@ -40,7 +44,7 @@ class _CreateProjectState extends State<CreateProject> {
                       setState(() => title = titleInput);
                     },
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -56,7 +60,7 @@ class _CreateProjectState extends State<CreateProject> {
                           double.parse(savingsGoalInput.replaceAll(',', '.')));
                     },
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   Row(
                     children: [
                       Expanded(
@@ -88,7 +92,7 @@ class _CreateProjectState extends State<CreateProject> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 15.0),
                   FilledButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
@@ -96,17 +100,29 @@ class _CreateProjectState extends State<CreateProject> {
                               .read<ProjectProvider>()
                               .createProject(
                                   title, savingsGoal, currency!.symbol)
-                              .then((response) => Navigator.pop(context));
+                              .then((response) => _onSuccess(context))
+                              .catchError(
+                                  (error, stackTrace) => _onError(context));
                         }
                       },
                       child: Text(AppLocalizations.of(context).createProject))
                 ]),
               ))),
-    );
+    ]);
   }
 
   bool _savingsGoalInputIsValid(String savingsGoalInput) {
     return savingsGoalInput.isNotEmpty &&
         double.tryParse(savingsGoalInput.replaceAll(',', '.')) != null;
+  }
+
+  void _onError(BuildContext context) {
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).error)));
+  }
+
+  void _onSuccess(BuildContext context) {
+    Navigator.pop(context);
   }
 }
