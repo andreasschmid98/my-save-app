@@ -22,7 +22,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
 
   Map<int, String> migrationScripts = {
     1: '''
-  CREATE TABLE projects(
+  CREATE TABLE IF NOT EXISTS projects(
   id INTEGER PRIMARY KEY NOT NULL,
   title TEXT,
   savingsGoal REAL,
@@ -31,7 +31,7 @@ class DatabaseService implements ProjectRepository, EntryRepository {
   )
   ''',
     2: '''
-    CREATE TABLE entries(
+    CREATE TABLE IF NOT EXISTS entries(
       id INTEGER PRIMARY KEY NOT NULL,
       description TEXT,
       saved REAL,

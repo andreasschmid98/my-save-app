@@ -119,7 +119,8 @@ class _EditProjectState extends State<EditProject> {
                             await context
                                 .read<ProjectProvider>()
                                 .updateProject(project)
-                                .then((response) => Navigator.pop(context));
+                                .then((response) => _onSuccess(context))
+                                .onError((error, stackTrace) => _onError(context));
                           }
                         },
                         child: Text(AppLocalizations.of(context).saveChanges))
@@ -132,5 +133,19 @@ class _EditProjectState extends State<EditProject> {
   bool _savingsGoalInputIsValid(String savingsGoalInput) {
     return savingsGoalInput.isNotEmpty &&
         double.tryParse(savingsGoalInput.replaceAll(',', '.')) != null;
+  }
+
+  void _onError(BuildContext context) {
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(AppLocalizations.of(context)
+            .error)));
+  }
+
+  void _onSuccess(BuildContext context) {
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+            AppLocalizations.of(context).projectDeleted)));
   }
 }

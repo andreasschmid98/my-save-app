@@ -28,10 +28,10 @@ class _CreateProjectState extends State<CreateProject> {
                 padding: const EdgeInsets.all(20.0),
                 child:
                     Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                      Text(AppLocalizations.of(context).createProject),
-                      const SizedBox(
-                        height: 15,
-                      ),
+                  Text(AppLocalizations.of(context).createProject),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   TextFormField(
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(10.0),
@@ -100,7 +100,9 @@ class _CreateProjectState extends State<CreateProject> {
                               .read<ProjectProvider>()
                               .createProject(
                                   title, savingsGoal, currency!.symbol)
-                              .then((response) => Navigator.pop(context));
+                              .then((response) => _onSuccess(context))
+                              .catchError(
+                                  (error, stackTrace) => _onError(context));
                         }
                       },
                       child: Text(AppLocalizations.of(context).createProject))
@@ -112,5 +114,15 @@ class _CreateProjectState extends State<CreateProject> {
   bool _savingsGoalInputIsValid(String savingsGoalInput) {
     return savingsGoalInput.isNotEmpty &&
         double.tryParse(savingsGoalInput.replaceAll(',', '.')) != null;
+  }
+
+  void _onError(BuildContext context) {
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).error)));
+  }
+
+  void _onSuccess(BuildContext context) {
+    Navigator.pop(context);
   }
 }

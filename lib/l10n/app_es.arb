@@ -59,5 +59,6 @@
   "executeRecurrentEntryAction": "Ejecutar",
   "all": "Todo",
   "recurrent": "Recurrente",
-  "single": "Individual"
+  "single": "Individual",
+  "error": "Se ha producido un error. Por favor, inténtelo de nuevo."
 }

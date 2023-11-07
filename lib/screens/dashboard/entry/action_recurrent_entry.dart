@@ -92,11 +92,9 @@ class _ActionRecurrentEntryState extends State<ActionRecurrentEntry> {
                         await context
                             .read<ProjectProvider>()
                             .deleteEntryById(widget.entry.id)
-                            .then((response) => Navigator.pop(context));
-
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                                AppLocalizations.of(context).entryDeleted)));
+                            .then((response) => _onDeleteSuccess(context))
+                            .onError((error, stackTrace) =>
+                                _onErrorDeleteRecurrent(context));
                       } else {
                         final totalSavings = DashboardService()
                             .calculateTotalSavingsOfRecurrentEntry(
@@ -112,7 +110,12 @@ class _ActionRecurrentEntryState extends State<ActionRecurrentEntry> {
                             .then((response) => context
                                 .read<ProjectProvider>()
                                 .deleteEntryById(widget.entry.id)
-                                .then((response) => Navigator.pop(context)));
+                                .then((response) =>
+                                    _onSaveAsSingleSuccess(context))
+                                .onError((error, stackTrace) =>
+                                    _onErrorDeleteNewSingle(context)))
+                            .onError((error, stackTrace) =>
+                                _onErrorDeleteRecurrent(context));
                       }
                     },
                     child: Text(AppLocalizations.of(context)
@@ -123,5 +126,37 @@ class _ActionRecurrentEntryState extends State<ActionRecurrentEntry> {
         ),
       ),
     ]);
+  }
+
+  void _onErrorDeleteRecurrent(BuildContext context) {
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).error)));
+  }
+
+  Future<void> _onErrorDeleteNewSingle(BuildContext context) async {
+    await context
+        .read<ProjectProvider>()
+        .createEntry(
+            widget.entry.description,
+            widget.entry.projectId,
+            widget.entry.saved,
+            widget.entry.frequency,
+            widget.entry.startingDate)
+        .then((response) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context).error)));
+    });
+  }
+
+  void _onDeleteSuccess(BuildContext context) {
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).entryDeleted)));
+  }
+
+  void _onSaveAsSingleSuccess(BuildContext context) {
+    Navigator.pop(context);
   }
 }

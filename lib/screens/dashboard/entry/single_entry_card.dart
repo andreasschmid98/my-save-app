@@ -36,12 +36,11 @@ class SingleEntryCard extends StatelessWidget {
               Expanded(
                 flex: 4,
                 child: ListTile(
-                  title: Text(
-                    entry.description,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  )
-                ),
+                    title: Text(
+                  entry.description,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                )),
               ),
               Expanded(
                 flex: 3,
@@ -63,7 +62,7 @@ class SingleEntryCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 3.0),
                         child: Text(
-                          '${AppLocalizations.of(context).createdAt} ${DateFormat.yMd( locale!.languageCode).format(entry.createdAt)}',
+                          '${AppLocalizations.of(context).createdAt} ${DateFormat.yMd(locale!.languageCode).format(entry.createdAt)}',
                           style: TextStyle(
                             fontSize: 10.0,
                             color: Colors.grey[500],

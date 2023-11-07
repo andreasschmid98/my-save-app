@@ -126,7 +126,7 @@ class _CreateRecurrentEntryState extends State<CreateRecurrentEntry> {
                       startingDate = await showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
+                        firstDate: DateTime(2022),
                         lastDate: DateTime(2100),
                       );
                       startingDateSelected =
@@ -145,7 +145,9 @@ class _CreateRecurrentEntryState extends State<CreateRecurrentEntry> {
                               .read<ProjectProvider>()
                               .createEntry(description, projectId, saved,
                                   frequency!, startingDate!)
-                              .then((response) => Navigator.pop(context));
+                              .then((response) => _onSuccess(context))
+                              .onError(
+                                  (error, stackTrace) => _onError(context));
                         }
                       },
                       child: Text(AppLocalizations.of(context).createEntry))
@@ -157,5 +159,15 @@ class _CreateRecurrentEntryState extends State<CreateRecurrentEntry> {
   bool _amountInputIsValid(String amountInput) {
     return amountInput.isNotEmpty &&
         double.tryParse(amountInput.replaceAll(',', '.')) != null;
+  }
+
+  void _onError(BuildContext context) {
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).error)));
+  }
+
+  void _onSuccess(BuildContext context) {
+    Navigator.pop(context);
   }
 }

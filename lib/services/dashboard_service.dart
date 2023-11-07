@@ -42,36 +42,44 @@ class DashboardService {
       return totalSavings; // Savings haven't started yet.
     }
 
-    // Calculate how many times saving occurred within the time period between
-    // startingDate and currentDate
-    int yearsDiff = currentDate.year - entry.startingDate.year;
-    int monthsDiff = currentDate.month - entry.startingDate.month;
-    int daysDiff = currentDate.day - entry.startingDate.day;
+    DateTime nextSavingDate = entry.startingDate;
+    while (nextSavingDate.isBefore(currentDate)) {
+      // Calculate the time difference between the current date and the next saving date
+      Duration timeDifference = currentDate.difference(nextSavingDate);
 
-    int totalDaysDiff = yearsDiff * 365 + monthsDiff * 30 + daysDiff;
+      if (timeDifference.inDays >= 0) {
+        // Calculate savings for this cycle and add it to the total
+        totalSavings += entry.saved;
 
-    // Calculate the number of full cycles completed
-    int fullCycles = 0;
-    switch (entry.frequency) {
-      case Frequency.DAILY:
-        fullCycles = totalDaysDiff;
-        break;
-      case Frequency.WEEKLY:
-        fullCycles = totalDaysDiff ~/ 7;
-        break;
-      case Frequency.MONTHLY:
-        fullCycles = totalDaysDiff ~/ 30;
-        break;
-      case Frequency.YEARLY:
-        fullCycles = yearsDiff;
-        break;
-      case Frequency.SINGLE:
-        fullCycles = 1;
-        break;
+        // Move to the next saving date based on the frequency
+        switch (entry.frequency) {
+          case Frequency.DAILY:
+            nextSavingDate = nextSavingDate.add(Duration(days: 1));
+            break;
+          case Frequency.WEEKLY:
+            nextSavingDate = nextSavingDate.add(Duration(days: 7));
+            break;
+          case Frequency.MONTHLY:
+            // Move to the next month, considering the actual number of days
+            int nextMonth = nextSavingDate.month + 1;
+            int nextYear = nextSavingDate.year;
+
+            if (nextMonth > 12) {
+              nextMonth = 1;
+              nextYear++;
+            }
+
+            nextSavingDate = DateTime(nextYear, nextMonth, nextSavingDate.day);
+            break;
+          case Frequency.YEARLY:
+            nextSavingDate = DateTime(nextSavingDate.year + 1,
+                nextSavingDate.month, nextSavingDate.day);
+            break;
+          case Frequency.SINGLE:
+            break;
+        }
+      }
     }
-
-    // Calculate savings for full cycles and add the initial savings
-    totalSavings = entry.saved * fullCycles + entry.saved;
 
     return totalSavings;
   }

@@ -59,6 +59,7 @@
   "executeRecurrentEntryAction": "Durchführen",
   "all": "Alle",
   "recurrent": "Wiederkehrend",
-  "single": "Einzeln"
+  "single": "Einzeln",
+  "error": "Es ist ein Fehler aufgetreten. Bitte erneut versuchen!"
 }
 

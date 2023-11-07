@@ -59,6 +59,7 @@
   "executeRecurrentEntryAction": "Exécuter",
   "all": "Tout",
   "recurrent": "Récurrent",
-  "single": "Unique"
+  "single": "Unique",
+  "error": "Une erreur s'est produite. Veuillez réessayer!"
 }
 
