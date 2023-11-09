@@ -5,5 +5,3 @@ enum Frequency {
   MONTHLY,
   YEARLY,
 }
-
-

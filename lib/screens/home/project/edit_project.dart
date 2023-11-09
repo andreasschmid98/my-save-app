@@ -33,10 +33,10 @@ class _EditProjectState extends State<EditProject> {
                   padding: const EdgeInsets.all(20.0),
                   child:
                       Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                        Text(AppLocalizations.of(context).editProject),
-                        const SizedBox(
-                          height: 15,
-                        ),
+                    Text(AppLocalizations.of(context).editProject),
+                    const SizedBox(
+                      height: 15,
+                    ),
                     TextFormField(
                       initialValue: widget.project.title,
                       decoration: InputDecoration(
@@ -120,7 +120,8 @@ class _EditProjectState extends State<EditProject> {
                                 .read<ProjectProvider>()
                                 .updateProject(project)
                                 .then((response) => _onSuccess(context))
-                                .onError((error, stackTrace) => _onError(context));
+                                .onError(
+                                    (error, stackTrace) => _onError(context));
                           }
                         },
                         child: Text(AppLocalizations.of(context).saveChanges))
@@ -137,15 +138,13 @@ class _EditProjectState extends State<EditProject> {
 
   void _onError(BuildContext context) {
     Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(AppLocalizations.of(context)
-            .error)));
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).error)));
   }
 
   void _onSuccess(BuildContext context) {
     Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-            AppLocalizations.of(context).projectDeleted)));
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).projectDeleted)));
   }
 }

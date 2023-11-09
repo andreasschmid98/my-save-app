@@ -16,49 +16,69 @@ class PercentProgressCard extends StatefulWidget {
 
 class _PercentProgressCardState extends State<PercentProgressCard>
     with AutomaticKeepAliveClientMixin {
-  @override
-  Widget build(BuildContext context) {
-    final CustomThemeExtension customTheme =
-        Theme.of(context).extension<CustomThemeExtension>()!;
-
-    super.build(context);
-    return Card(
-      child: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            SizedBox(
-              width: 250,
-              height: 250,
-              child: TweenAnimationBuilder(
-                duration: const Duration(milliseconds: 1200),
-                curve: Curves.easeInCirc,
-                tween: Tween<double>(
-                  begin: 0,
-                  end: widget.savingStatusInPercent,
-                ),
-                builder: (context, value, _) => CircularProgressIndicator(
-                  backgroundColor: customTheme.progressBarColor,
-                  value: value,
-                ),
-              ),
-            ),
-            FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(
-                '${_getSavingStatusInPercentAsString()}${AppLocalizations.of(context).percent}',
-                style: TextStyle(
-                    fontSize: 30, color: customTheme.percentProgressColor),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  late double _circularProgressDiameter;
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    final CustomThemeExtension customTheme =
+        Theme.of(context).extension<CustomThemeExtension>()!;
+
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final width = constraints.maxWidth;
+        final height = constraints.maxHeight;
+
+        _circularProgressDiameter =
+            _calculateCircularProgressDiameter(height, width);
+
+        return Card(
+          child: Center(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  width: _circularProgressDiameter,
+                  height: _circularProgressDiameter,
+                  child: TweenAnimationBuilder(
+                    duration: const Duration(milliseconds: 1200),
+                    curve: Curves.easeInCirc,
+                    tween: Tween<double>(
+                      begin: 0,
+                      end: widget.savingStatusInPercent,
+                    ),
+                    builder: (context, value, _) => CircularProgressIndicator(
+                      backgroundColor: customTheme.progressBarColor,
+                      value: value,
+                    ),
+                  ),
+                ),
+                FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    '${_getSavingStatusInPercentAsString()}${AppLocalizations.of(context).percent}',
+                    style: TextStyle(
+                        fontSize: 30, color: customTheme.percentProgressColor),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  double _calculateCircularProgressDiameter(double height, double width) {
+    if (height > width) {
+      return width * 0.8;
+    }
+    return height * 0.8;
+  }
 
   String _getSavingStatusInPercentAsString() {
     final savingStatus = widget.savingStatusInPercent * 100;
