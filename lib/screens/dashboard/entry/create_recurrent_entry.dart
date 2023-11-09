@@ -126,7 +126,7 @@ class _CreateRecurrentEntryState extends State<CreateRecurrentEntry> {
                       startingDate = await showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
-                        firstDate: DateTime(2022),
+                        firstDate: DateTime(1990),
                         lastDate: DateTime(2100),
                       );
                       startingDateSelected =
