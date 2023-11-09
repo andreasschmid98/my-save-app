@@ -71,7 +71,7 @@ class ProjectCard extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                          '${(savingsStatusInPercent * 100).toStringAsFixed(0)}${AppLocalizations.of(context).percent}',
+                          '${_getSavingStatusInPercentAsString(savingsStatusInPercent)}${AppLocalizations.of(context).percent}',
                           style: TextStyle(
                               color: customTheme.percentProgressColor)),
                     ),
@@ -93,5 +93,13 @@ class ProjectCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getSavingStatusInPercentAsString(double savingStatusInPercent) {
+    final savingStatus = savingStatusInPercent * 100;
+    if (savingStatus < 1 && savingStatus > 0) {
+      return '< 1';
+    }
+    return savingStatus.toStringAsFixed(0);
   }
 }
