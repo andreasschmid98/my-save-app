@@ -144,7 +144,5 @@ class _EditProjectState extends State<EditProject> {
 
   void _onSuccess(BuildContext context) {
     Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).projectDeleted)));
   }
 }
