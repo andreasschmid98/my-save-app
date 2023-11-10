@@ -38,6 +38,8 @@ class SavingsInformationCard extends StatelessWidget {
                 Text(
                   description.toUpperCase(),
                   style: const TextStyle(fontSize: 15),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
               ],
             ),

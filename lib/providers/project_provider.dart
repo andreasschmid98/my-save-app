@@ -42,9 +42,10 @@ class ProjectProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> createEntry(
-      String description, int projectId, double saved, Frequency frequency, DateTime startingDate) async {
-    await _entryRepository.createEntry(description, projectId, saved, frequency, startingDate);
+  Future<void> createEntry(String description, int projectId, double saved,
+      Frequency frequency, DateTime startingDate) async {
+    await _entryRepository.createEntry(
+        description, projectId, saved, frequency, startingDate);
     projects = await _getRefreshedProjects();
     notifyListeners();
   }

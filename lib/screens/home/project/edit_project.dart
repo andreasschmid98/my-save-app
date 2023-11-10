@@ -18,115 +18,130 @@ class EditProject extends StatefulWidget {
 class _EditProjectState extends State<EditProject> {
   final _formKey = GlobalKey<FormState>();
 
+  bool _ignoreInput = false;
+
   String? title;
   double? savingsGoal;
   Currency? currency;
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: [
-        Center(
-            child: Form(
-                key: _formKey,
-                child: Container(
-                  padding: const EdgeInsets.all(20.0),
-                  child:
-                      Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                        Text(AppLocalizations.of(context).editProject),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                    TextFormField(
-                      initialValue: widget.project.title,
-                      decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(10.0),
-                          hintText: AppLocalizations.of(context).title,
-                          prefixIcon: const Icon(Icons.description_outlined)),
-                      validator: (titleInput) => titleInput!.isEmpty
-                          ? AppLocalizations.of(context).titleReminder
-                          : null,
-                      onChanged: (titleInput) {
-                        setState(() => title = titleInput);
-                      },
-                    ),
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      initialValue:
-                          widget.project.savingsGoal.toStringAsFixed(2),
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.all(10.0),
-                          hintText: AppLocalizations.of(context).savingsGoal,
-                          prefixIcon: const Icon(Icons.check_circle_rounded)),
-                      validator: (savingsGoalInput) =>
-                          _savingsGoalInputIsValid(savingsGoalInput!)
-                              ? null
-                              : AppLocalizations.of(context)
-                                  .savingsGoalReminder,
-                      onChanged: (savingsGoalInput) {
-                        setState(() => savingsGoal = double.parse(
-                            savingsGoalInput.replaceAll(',', '.')));
-                      },
-                    ),
-                    const SizedBox(height: 20.0),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: DropdownButtonFormField<Currency>(
-                            value: Currency.values.firstWhere((currency) =>
-                                currency.symbol == widget.project.currency),
-                            hint: Text(AppLocalizations.of(context).currency),
-                            onChanged: (Currency? selectedCurrency) {
-                              setState(() {
-                                currency = selectedCurrency!;
-                              });
-                            },
-                            items: Currency.values
-                                .map<DropdownMenuItem<Currency>>(
-                                    (Currency currency) {
-                              return DropdownMenuItem<Currency>(
-                                value: currency,
-                                child: Text(
-                                    '${currency.symbol} (${currency.abbreviation})'),
-                              );
-                            }).toList(),
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.all(10.0),
-                              prefixIcon:
-                                  Icon(Icons.currency_exchange_outlined),
-                            ),
+    return IgnorePointer(
+      ignoring: _ignoreInput,
+      child: Wrap(
+        children: [
+          Center(
+              child: Form(
+                  key: _formKey,
+                  child: Container(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Text(AppLocalizations.of(context).editProject),
+                          const SizedBox(
+                            height: 15,
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20.0),
-                    FilledButton(
-                        onPressed: () async {
-                          title = title ?? widget.project.title;
-                          savingsGoal =
-                              savingsGoal ?? widget.project.savingsGoal;
-                          String currencyAsString =
-                              currency?.symbol ?? widget.project.currency;
+                          TextFormField(
+                            initialValue: widget.project.title,
+                            decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.all(10.0),
+                                hintText: AppLocalizations.of(context).title,
+                                prefixIcon:
+                                    const Icon(Icons.description_outlined)),
+                            validator: (titleInput) => titleInput!.isEmpty
+                                ? AppLocalizations.of(context).titleReminder
+                                : null,
+                            onChanged: (titleInput) {
+                              setState(() => title = titleInput);
+                            },
+                          ),
+                          const SizedBox(height: 20.0),
+                          TextFormField(
+                            initialValue:
+                                widget.project.savingsGoal.toStringAsFixed(2),
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.all(10.0),
+                                hintText:
+                                    AppLocalizations.of(context).savingsGoal,
+                                prefixIcon:
+                                    const Icon(Icons.check_circle_rounded)),
+                            validator: (savingsGoalInput) =>
+                                _savingsGoalInputIsValid(savingsGoalInput!)
+                                    ? null
+                                    : AppLocalizations.of(context)
+                                        .savingsGoalReminder,
+                            onChanged: (savingsGoalInput) {
+                              setState(() => savingsGoal = double.parse(
+                                  savingsGoalInput.replaceAll(',', '.')));
+                            },
+                          ),
+                          const SizedBox(height: 20.0),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: DropdownButtonFormField<Currency>(
+                                  value: Currency.values.firstWhere(
+                                      (currency) =>
+                                          currency.symbol ==
+                                          widget.project.currency),
+                                  hint: Text(
+                                      AppLocalizations.of(context).currency),
+                                  onChanged: (Currency? selectedCurrency) {
+                                    setState(() {
+                                      currency = selectedCurrency!;
+                                    });
+                                  },
+                                  items: Currency.values
+                                      .map<DropdownMenuItem<Currency>>(
+                                          (Currency currency) {
+                                    return DropdownMenuItem<Currency>(
+                                      value: currency,
+                                      child: Text(
+                                          '${currency.symbol} (${currency.abbreviation})'),
+                                    );
+                                  }).toList(),
+                                  decoration: const InputDecoration(
+                                    contentPadding: EdgeInsets.all(10.0),
+                                    prefixIcon:
+                                        Icon(Icons.currency_exchange_outlined),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 20.0),
+                          FilledButton(
+                              onPressed: () async {
+                                title = title ?? widget.project.title;
+                                savingsGoal =
+                                    savingsGoal ?? widget.project.savingsGoal;
+                                String currencyAsString =
+                                    currency?.symbol ?? widget.project.currency;
 
-                          Project project = Project(
-                              id: widget.project.id,
-                              title: title!,
-                              savingsGoal: savingsGoal!,
-                              currency: currencyAsString,
-                              createdAt: widget.project.createdAt);
-                          if (_formKey.currentState!.validate()) {
-                            await context
-                                .read<ProjectProvider>()
-                                .updateProject(project)
-                                .then((response) => _onSuccess(context))
-                                .onError((error, stackTrace) => _onError(context));
-                          }
-                        },
-                        child: Text(AppLocalizations.of(context).saveChanges))
-                  ]),
-                )))
-      ],
+                                Project project = Project(
+                                    id: widget.project.id,
+                                    title: title!,
+                                    savingsGoal: savingsGoal!,
+                                    currency: currencyAsString,
+                                    createdAt: widget.project.createdAt);
+                                if (_formKey.currentState!.validate()) {
+                                  _ignoreInput = true;
+                                  await context
+                                      .read<ProjectProvider>()
+                                      .updateProject(project)
+                                      .then((response) => _onSuccess(context))
+                                      .onError((error, stackTrace) =>
+                                          _onError(context));
+                                }
+                              },
+                              child: Text(
+                                  AppLocalizations.of(context).saveChanges))
+                        ]),
+                  )))
+        ],
+      ),
     );
   }
 
@@ -137,15 +152,11 @@ class _EditProjectState extends State<EditProject> {
 
   void _onError(BuildContext context) {
     Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(AppLocalizations.of(context)
-            .error)));
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).error)));
   }
 
   void _onSuccess(BuildContext context) {
     Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
-            AppLocalizations.of(context).projectDeleted)));
   }
 }

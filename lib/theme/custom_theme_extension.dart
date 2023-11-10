@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
-  const CustomThemeExtension({
-    required this.progressBarColor,
-    required this.percentProgressColor
-  });
+  const CustomThemeExtension(
+      {required this.progressBarColor, required this.percentProgressColor});
 
   final Color? progressBarColor;
   final Color? percentProgressColor;
@@ -24,7 +22,8 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     }
     return CustomThemeExtension(
       progressBarColor: Color.lerp(progressBarColor, other.progressBarColor, t),
-      percentProgressColor: Color.lerp(percentProgressColor, other.percentProgressColor, t),
+      percentProgressColor:
+          Color.lerp(percentProgressColor, other.percentProgressColor, t),
     );
   }
 }

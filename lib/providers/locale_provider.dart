@@ -1,7 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:my_save_app/factories/locale_factory.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io';
 
 class LocaleProvider with ChangeNotifier {
   Locale? locale;
@@ -9,7 +10,8 @@ class LocaleProvider with ChangeNotifier {
 
   void initialize() async {
     final sharedPreferences = await SharedPreferences.getInstance();
-    String localeAsString = sharedPreferences.getString('locale') ?? Platform.localeName;
+    String localeAsString =
+        sharedPreferences.getString('locale') ?? Platform.localeName;
     locale = LocaleFactory.create(localeAsString);
     initialized = true;
     notifyListeners();

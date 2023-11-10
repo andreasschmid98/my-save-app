@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:my_save_app/providers/locale_provider.dart';
 import 'package:my_save_app/providers/project_provider.dart';
 import 'package:my_save_app/providers/theme_provider.dart';
 import 'package:my_save_app/screens/home/home.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 import 'screens/dashboard/dashboard.dart';
 
