@@ -27,56 +27,62 @@ class _EntryListState extends State<EntryList> {
     final recurrentEntries =
         entries.where((entry) => entry.frequency != Frequency.SINGLE).toList();
 
-    return Stack(children: [
-      SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 25.0),
-              child: SegmentedButton<Filter>(
-                segments: const <ButtonSegment<Filter>>[
-                  ButtonSegment<Filter>(
-                      value: Filter.All, label: Icon(Icons.density_small)),
-                  ButtonSegment<Filter>(
-                      value: Filter.Recurrent, label: Icon(Icons.cached)),
-                  ButtonSegment<Filter>(
-                      value: Filter.Single,
-                      label: Icon(Icons.arrow_forward_outlined)),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 25.0),
+          child: SegmentedButton<Filter>(
+            segments: const <ButtonSegment<Filter>>[
+              ButtonSegment<Filter>(
+                  value: Filter.All, label: Icon(Icons.density_small)),
+              ButtonSegment<Filter>(
+                  value: Filter.Recurrent, label: Icon(Icons.cached)),
+              ButtonSegment<Filter>(
+                  value: Filter.Single,
+                  label: Icon(Icons.arrow_forward_outlined)),
+            ],
+            selected: <Filter>{filter},
+            onSelectionChanged: (Set<Filter> selectedFilter) {
+              setState(() {
+                filter = selectedFilter.first;
+              });
+            },
+            showSelectedIcon: false,
+            style: const ButtonStyle(
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              visualDensity: VisualDensity(horizontal: 4, vertical: -1),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Stack(children: [
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RecurrentEntryList(
+                      recurrentEntries: recurrentEntries,
+                      singleEntries: singleEntries,
+                      filter: filter),
+                  filter == Filter.All &&
+                          recurrentEntries.isNotEmpty &&
+                          singleEntries.isNotEmpty
+                      ? const Divider(height: 50)
+                      : Container(),
+                  SingleEntryList(
+                      singleEntries: singleEntries,
+                      recurrentEntries: recurrentEntries,
+                      filter: filter)
                 ],
-                selected: <Filter>{filter},
-                onSelectionChanged: (Set<Filter> selectedFilter) {
-                  setState(() {
-                    filter = selectedFilter.first;
-                  });
-                },
-                showSelectedIcon: false,
-                style: const ButtonStyle(
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  visualDensity: VisualDensity(horizontal: 4, vertical: -1),
-                ),
               ),
             ),
-            RecurrentEntryList(
-                recurrentEntries: recurrentEntries,
-                singleEntries: singleEntries,
-                filter: filter),
-            filter == Filter.All &&
-                    recurrentEntries.isNotEmpty &&
-                    singleEntries.isNotEmpty
-                ? const Divider(height: 50)
-                : Container(),
-            SingleEntryList(
+            NoEntriesAvailable(
                 singleEntries: singleEntries,
                 recurrentEntries: recurrentEntries,
                 filter: filter)
-          ],
+          ]),
         ),
-      ),
-      NoEntriesAvailable(
-          singleEntries: singleEntries,
-          recurrentEntries: recurrentEntries,
-          filter: filter)
-    ]);
+      ],
+    );
   }
 }
