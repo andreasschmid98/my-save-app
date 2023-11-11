@@ -65,7 +65,7 @@ class _CreateProjectState extends State<CreateProject> {
                             savingsGoalInput.replaceAll(',', '.')));
                       },
                     ),
-                    const SizedBox(height: 15.0),
+                    const SizedBox(height: 15.00),
                     Row(
                       children: [
                         Expanded(
