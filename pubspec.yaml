@@ -3,7 +3,7 @@ description: A simple app to track savings goals.
 
 publish_to: 'none'
 
-version: 2.0.0+3
+version: 2.1.0+11
 
 environment:
   sdk: '>=3.1.0 <4.0.0'

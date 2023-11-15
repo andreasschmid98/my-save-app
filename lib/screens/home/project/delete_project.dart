@@ -59,11 +59,13 @@ class DeleteProject extends StatelessWidget {
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(AppLocalizations.of(context).error)));
+    _ignoreInput = false;
   }
 
   void _onSuccess(BuildContext context) {
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(AppLocalizations.of(context).projectDeleted)));
+    _ignoreInput = false;
   }
 }

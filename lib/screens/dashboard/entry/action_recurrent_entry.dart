@@ -137,6 +137,7 @@ class _ActionRecurrentEntryState extends State<ActionRecurrentEntry> {
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(AppLocalizations.of(context).error)));
+    _ignoreInput = false;
   }
 
   Future<void> _onErrorDeleteNewSingle(BuildContext context) async {
@@ -153,15 +154,18 @@ class _ActionRecurrentEntryState extends State<ActionRecurrentEntry> {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(AppLocalizations.of(context).error)));
     });
+    _ignoreInput = false;
   }
 
   void _onDeleteSuccess(BuildContext context) {
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(AppLocalizations.of(context).entryDeleted)));
+    _ignoreInput = false;
   }
 
   void _onSaveAsSingleSuccess(BuildContext context) {
     Navigator.pop(context);
+    _ignoreInput = false;
   }
 }

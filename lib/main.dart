@@ -5,8 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:my_save_app/providers/locale_provider.dart';
 import 'package:my_save_app/providers/project_provider.dart';
-import 'package:my_save_app/providers/theme_provider.dart';
 import 'package:my_save_app/screens/home/home.dart';
+import 'package:my_save_app/theme/custom_theme.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/dashboard/dashboard.dart';
@@ -25,9 +25,6 @@ Future<void> main() async {
     ChangeNotifierProvider<LocaleProvider>(
       create: (_) => LocaleProvider(),
     ),
-    ChangeNotifierProvider<ThemeProvider>(
-      create: (_) => ThemeProvider(),
-    ),
   ], child: const WeSaveApp()));
 }
 
@@ -36,11 +33,9 @@ class WeSaveApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<ThemeProvider>().initialize();
     context.watch<ProjectProvider>().initialize();
     context.watch<LocaleProvider>().initialize();
 
-    final theme = context.watch<ThemeProvider>().theme;
     final locale = context.watch<LocaleProvider>().locale;
 
     return MaterialApp(
@@ -58,7 +53,7 @@ class WeSaveApp extends StatelessWidget {
         Locale('es'),
         Locale('fr')
       ],
-      theme: theme,
+      theme: CustomTheme.theme,
       home: const Home(),
       routes: {
         '/home': (context) => const Home(),
