@@ -2,7 +2,6 @@ import '../models/entry.dart';
 import '../models/frequency.dart';
 
 class DashboardService {
-
   double calculateTotalSavings(List<Entry> entries) {
     if (entries.isEmpty) {
       return 0.0;
