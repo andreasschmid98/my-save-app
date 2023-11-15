@@ -128,9 +128,11 @@ class _CreateProjectState extends State<CreateProject> {
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(AppLocalizations.of(context).error)));
+    _ignoreInput = false;
   }
 
   void _onSuccess(BuildContext context) {
     Navigator.pop(context);
+    _ignoreInput = false;
   }
 }
